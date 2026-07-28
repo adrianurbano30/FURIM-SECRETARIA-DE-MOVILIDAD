@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secretaría de Movilidad de Cali</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+
+body{
+
+    min-height:100vh;
+
+    background-image:
+    linear-gradient(
+    90deg,
+    rgba(255,255,255,.12) 0%,
+    rgba(255,255,255,.06) 35%,
+    rgba(255,255,255,.02) 60%,
+    rgba(0,26,74,.10) 100%
+    ),
+
+        url("src/agenteM3.png");
+
+    background-size:cover;
+    background-position:center center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+}
+
+</style>
+   
+</head>
+<body class="min-h-screen flex flex-col justify-between font-sans overflow-x-hidden">
+
+    <!-- class="bg-linear-to-l from-blue-600 from-10% via-ble-800 via-40% to-blue-900 to-90% min-h-screen flex flex-col justify-between font-sans overflow-x-hidden" -->
+
+    <header class="w-full max-w-[1080px] mx-auto pt-6 2xl:mt-41 xl:mt-41 mt-10 px-4 text-center z-10 ">
+        <a href="opts.html" class="inline-flex items-center justify-center bg-[#002855] border-2 border-[#002855] px-8 py-3 rounded-xl shadow-xl">
+            <h1 class="text-2xl md:text-3xl font-black text-white tracking-wider uppercase flex items-center gap-3">
+                SECRETARÍA DE MOVILIDAD
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-[#DB8700] size-6">
+                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z" />
+                </svg>
+
+            </h1>
+        </a>
+        
+        <div class="w-1 bg-[#002855] h-6 mx-auto mt-0 shadow-md"></div>
+        <!-- <div class="h-1 bg-[#002855] max-w-[1100px] mx-auto hidden lg:block"></div> -->
+    </header>
+
+    <main class="flex-grow w-full max-w-[1250px] mx-auto px-4 py-2 z-10 border-t-5 rounded-t-lg border-[#002855] ">
+       
+        <!-- <div class="absolute inset-0 bg-[url('src/bg_movilidadsecretaria.jpeg')] bg-contain bg-no-repeat bg-center z-0"></div> -->
+
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 items-stretch">
+
+             <!-- LINK DEPENDENCIA DESPACHO DEL SECRETARIO -->
+
+            <div data-dependencia="despacho" class=" card-dependencia bg-linear-to-b from-amber-300 from-10% via-white via-30% to-white to-90% rounded-2xl p-1 hover:scale-105 transition-all duration-300 shadow-sm shadow-slate-50 border-2 border-slate-200 flex flex-col justify-between text-center relative group hover:border-[#DB8700]">
+                <!-- <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-1 bg-[#002855] h-7 -mt-4 hidden lg:block"></div> -->
+                <div>
+                    <div class="w-16 h-16 bg-[#002855] text-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
+                        
+                        <img src="src/logoDespachoSecretario.png" class="w-full h-full rounded-full object-cover">
+                        
+                        <!-- <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg> -->
+                    </div>
+                    <h2 class="text-[#002855] font-black  text-lg xl:text-lg 2xl:text-lg uppercase tracking-tight min-h-[48px] flex items-center justify-center">
+                        Despacho del Secretario
+                    </h2>
+                    <p class="text-slate-500 font-bold xl:text-sm  2xl:text-sm text-sm text-justify mb-3 leading-relaxed">
+                        Formula políticas, emite actos administrativos y coordina la estrategia de movilidad del Distrito. Es la instancia superior de decisión de la Secretaría.
+                        <!-- Es el área encargada de definir las normas y liderar las decisiones sobre la movilidad de la ciudad.  -->
+                        <!-- Lidera y coordina la movilidad del distrito. -->
+                    </p>
+                </div>
+                <!-- <a href="dependencia.html?dep=despacho" class="mt-6 inline-flex items-center justify-center w-full bg-[#D68700] hover:bg-[#FFA70F] text-blue-950 font-bold text-md py-2 px-4 rounded-lg shadow-sm transition duration-700 ease-in-out uppercase tracking-wider gap-1">
+                    Ver funciones 
+                    <svg xmlns="http://www.w3.org/2000/svg"  xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="30" height="30" viewBox="0 0 256 256" xml:space="preserve">
+                            <g  style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
+	                            <path  d="M 69.416 43.298 H 68.97 c -0.983 0 -1.917 0.216 -2.756 0.603 c -0.644 -2.975 -3.295 -5.21 -6.459 -5.21 h -0.447 c -1.128 0 -2.19 0.284 -3.12 0.784 c -1 -2.379 -3.355 -4.054 -6.094 -4.054 h -0.447 c -0.925 0 -1.807 0.191 -2.606 0.536 v -9.458 c 0 -3.644 -2.964 -6.607 -6.608 -6.607 h -0.447 c -3.643 0 -6.607 2.964 -6.607 6.607 v 24.261 l -3.005 2.281 c -2.394 1.817 -3.911 4.461 -4.273 7.444 c -0.362 2.984 0.479 5.914 2.37 8.251 l 9.378 11.594 v 4.608 c 0 2.791 2.271 5.063 5.062 5.063 h 23.411 c 2.791 0 5.063 -2.271 5.063 -5.063 l 0.001 -4.375 c 2.996 -3.766 4.639 -8.438 4.639 -13.242 V 49.905 C 76.023 46.262 73.06 43.298 69.416 43.298 z M 72.023 67.32 c 0 4.102 -1.478 8.088 -4.159 11.224 c -0.311 0.362 -0.48 0.823 -0.48 1.3 v 5.094 c 0 0.586 -0.477 1.063 -1.063 1.063 H 42.911 c -0.585 0 -1.062 -0.477 -1.062 -1.063 v -5.316 c 0 -0.458 -0.157 -0.902 -0.445 -1.258 L 31.581 66.22 c -1.204 -1.488 -1.74 -3.354 -1.509 -5.254 c 0.23 -1.899 1.197 -3.583 2.721 -4.74 l 0.586 -0.444 v 5.495 c 0 1.104 0.896 2 2 2 s 2 -0.896 2 -2 v -9.506 c 0 -0.014 0 -0.026 0 -0.04 V 26.498 c 0 -1.438 1.169 -2.607 2.607 -2.607 h 0.447 c 1.438 0 2.607 1.17 2.607 2.607 v 15.53 c 0 0 0 0 0 0.001 s 0 0 0 0.001 l 0.01 12.917 c 0.001 1.104 0.896 1.998 2 1.998 c 0 0 0.001 0 0.001 0 c 1.104 -0.001 1.999 -0.896 1.998 -2.002 L 47.04 42.028 c 0 -1.438 1.169 -2.607 2.606 -2.607 h 0.447 c 1.438 0 2.607 1.17 2.607 2.607 v 3.27 c 0 0 0 0.001 0 0.001 c 0 0 0 0.001 0 0.001 l 0.009 9.647 c 0.001 1.104 0.896 1.998 2 1.998 c 0.001 0 0.001 0 0.002 0 c 1.104 -0.001 1.999 -0.897 1.998 -2.002 l -0.009 -9.646 c 0 -1.438 1.169 -2.607 2.606 -2.607 h 0.447 c 1.438 0 2.607 1.17 2.607 2.607 v 4.088 c -0.006 0.066 -0.02 0.13 -0.02 0.197 l 0.01 5.366 c 0.002 1.104 0.897 1.996 2 1.996 c 0.001 0 0.002 0 0.004 0 c 1.104 -0.002 1.998 -0.899 1.996 -2.004 l -0.009 -4.852 c 0.006 -0.062 0.019 -0.121 0.019 -0.184 c 0 -1.438 1.17 -2.607 2.607 -2.607 h 0.446 c 1.438 0 2.607 1.17 2.607 2.607 V 67.32 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(10, 1, 58); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+	                            <path  d="M 63.994 25.511 H 51.79 c -1.104 0 -2 -0.896 -2 -2 s 0.896 -2 2 -2 h 12.204 c 1.104 0 2 0.896 2 2 S 65.099 25.511 63.994 25.511 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(10, 1, 58); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+	                            <path  d="M 39.985 16.204 c -1.104 0 -2 -0.896 -2 -2 V 2 c 0 -1.104 0.896 -2 2 -2 s 2 0.896 2 2 v 12.204 C 41.985 15.309 41.09 16.204 39.985 16.204 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(10, 1, 58); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+	                            <path d="M 48.558 18.441 c -0.512 0 -1.023 -0.195 -1.414 -0.586 c -0.781 -0.781 -0.781 -2.047 0 -2.828 l 8.63 -8.629 c 0.781 -0.781 2.047 -0.781 2.828 0 c 0.781 0.781 0.781 2.047 0 2.828 l -8.63 8.629 C 49.581 18.246 49.069 18.441 48.558 18.441 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(10, 1, 58); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+	                            <path d="M 28.181 25.511 H 15.977 c -1.104 0 -2 -0.896 -2 -2 s 0.896 -2 2 -2 h 12.204 c 1.104 0 2 0.896 2 2 S 29.285 25.511 28.181 25.511 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(43, 0, 160); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+	                            <path d="M 31.413 18.441 c -0.512 0 -1.024 -0.195 -1.414 -0.586 L 21.37 9.226 c -0.781 -0.781 -0.781 -2.047 0 -2.828 c 0.78 -0.781 2.048 -0.781 2.828 0 l 8.629 8.629 c 0.781 0.781 0.781 2.047 0 2.828 C 32.437 18.246 31.925 18.441 31.413 18.441 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(10, 1, 58); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+                            </g>
+                    </svg>
+                   
+                </a> -->
+            </div>
+
+             <!-- LINK DEPENDENCIA UNIDAD DE APOYO A LA GESTION -->
+
+
+            <div data-dependencia="apoyo"  class=" card-dependencia bg-linear-to-b from-amber-300 from-10% via-white via-30% to-white to-90% rounded-2xl p-1 hover:scale-105 transition-all duration-300 shadow-sm shadow-slate-50 border-2 border-slate-200 flex flex-col justify-between text-center relative group hover:border-[#DB8700]">
+                <!-- <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-1 bg-[#002855] h-7 -mt-4 hidden lg:block"></div> -->
+                <div>
+                    <div class="w-16 h-16 bg-[#DB8700] text-blue-950 rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
+
+                        <img src="src/logoUAP.png" class="w-full h-full  rounded-full object-cover">
+                        <!-- <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg> -->
+                    </div>
+                    <h2 class="text-[#002855] font-black  text-lg xl:text-lg 2xl:text-lg uppercase tracking-tight min-h-[48px] flex items-center justify-center">
+                        Unidad de Apoyo a la Gestión
+                    </h2>
+                   <p class="text-slate-500 font-bold xl:text-sm  2xl:text-sm text-sm text-justify mt-3 leading-relaxed">
+                        Administra el talento humano, los recursos físicos, financieros y tecnológicos de la Secretaría. Es también el canal transversal de atención y gestión documental para la ciudadanía.
+                         <!-- Administra recursos, tecnología y atención al ciudadano. -->
+                         <!-- Es el área que gestiona los recursos internos (personal, dinero y tecnología) y facilita la atención y los trámites de los ciudadanos.  -->
+                    </p>
+                </div>
+                <!-- <a href="dependencia.html?dep=apoyo" class="mt-6 inline-flex items-center justify-center w-full bg-[#D68700] hover:bg-[#FFA70F] text-blue-950 font-bold text-md py-2 px-4 rounded-lg shadow-sm transition duration-700 ease-in-out uppercase tracking-wider gap-1">
+                    Ver funciones 
+                    <svg xmlns="http://www.w3.org/2000/svg"  xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="30" height="30" viewBox="0 0 256 256" xml:space="preserve">
+                            <g  style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
+	                            <path  d="M 69.416 43.298 H 68.97 c -0.983 0 -1.917 0.216 -2.756 0.603 c -0.644 -2.975 -3.295 -5.21 -6.459 -5.21 h -0.447 c -1.128 0 -2.19 0.284 -3.12 0.784 c -1 -2.379 -3.355 -4.054 -6.094 -4.054 h -0.447 c -0.925 0 -1.807 0.191 -2.606 0.536 v -9.458 c 0 -3.644 -2.964 -6.607 -6.608 -6.607 h -0.447 c -3.643 0 -6.607 2.964 -6.607 6.607 v 24.261 l -3.005 2.281 c -2.394 1.817 -3.911 4.461 -4.273 7.444 c -0.362 2.984 0.479 5.914 2.37 8.251 l 9.378 11.594 v 4.608 c 0 2.791 2.271 5.063 5.062 5.063 h 23.411 c 2.791 0 5.063 -2.271 5.063 -5.063 l 0.001 -4.375 c 2.996 -3.766 4.639 -8.438 4.639 -13.242 V 49.905 C 76.023 46.262 73.06 43.298 69.416 43.298 z M 72.023 67.32 c 0 4.102 -1.478 8.088 -4.159 11.224 c -0.311 0.362 -0.48 0.823 -0.48 1.3 v 5.094 c 0 0.586 -0.477 1.063 -1.063 1.063 H 42.911 c -0.585 0 -1.062 -0.477 -1.062 -1.063 v -5.316 c 0 -0.458 -0.157 -0.902 -0.445 -1.258 L 31.581 66.22 c -1.204 -1.488 -1.74 -3.354 -1.509 -5.254 c 0.23 -1.899 1.197 -3.583 2.721 -4.74 l 0.586 -0.444 v 5.495 c 0 1.104 0.896 2 2 2 s 2 -0.896 2 -2 v -9.506 c 0 -0.014 0 -0.026 0 -0.04 V 26.498 c 0 -1.438 1.169 -2.607 2.607 -2.607 h 0.447 c 1.438 0 2.607 1.17 2.607 2.607 v 15.53 c 0 0 0 0 0 0.001 s 0 0 0 0.001 l 0.01 12.917 c 0.001 1.104 0.896 1.998 2 1.998 c 0 0 0.001 0 0.001 0 c 1.104 -0.001 1.999 -0.896 1.998 -2.002 L 47.04 42.028 c 0 -1.438 1.169 -2.607 2.606 -2.607 h 0.447 c 1.438 0 2.607 1.17 2.607 2.607 v 3.27 c 0 0 0 0.001 0 0.001 c 0 0 0 0.001 0 0.001 l 0.009 9.647 c 0.001 1.104 0.896 1.998 2 1.998 c 0.001 0 0.001 0 0.002 0 c 1.104 -0.001 1.999 -0.897 1.998 -2.002 l -0.009 -9.646 c 0 -1.438 1.169 -2.607 2.606 -2.607 h 0.447 c 1.438 0 2.607 1.17 2.607 2.607 v 4.088 c -0.006 0.066 -0.02 0.13 -0.02 0.197 l 0.01 5.366 c 0.002 1.104 0.897 1.996 2 1.996 c 0.001 0 0.002 0 0.004 0 c 1.104 -0.002 1.998 -0.899 1.996 -2.004 l -0.009 -4.852 c 0.006 -0.062 0.019 -0.121 0.019 -0.184 c 0 -1.438 1.17 -2.607 2.607 -2.607 h 0.446 c 1.438 0 2.607 1.17 2.607 2.607 V 67.32 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(10, 1, 58); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+	                            <path  d="M 63.994 25.511 H 51.79 c -1.104 0 -2 -0.896 -2 -2 s 0.896 -2 2 -2 h 12.204 c 1.104 0 2 0.896 2 2 S 65.099 25.511 63.994 25.511 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(10, 1, 58); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+	                            <path  d="M 39.985 16.204 c -1.104 0 -2 -0.896 -2 -2 V 2 c 0 -1.104 0.896 -2 2 -2 s 2 0.896 2 2 v 12.204 C 41.985 15.309 41.09 16.204 39.985 16.204 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(10, 1, 58); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+	                            <path d="M 48.558 18.441 c -0.512 0 -1.023 -0.195 -1.414 -0.586 c -0.781 -0.781 -0.781 -2.047 0 -2.828 l 8.63 -8.629 c 0.781 -0.781 2.047 -0.781 2.828 0 c 0.781 0.781 0.781 2.047 0 2.828 l -8.63 8.629 C 49.581 18.246 49.069 18.441 48.558 18.441 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(10, 1, 58); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+	                            <path d="M 28.181 25.511 H 15.977 c -1.104 0 -2 -0.896 -2 -2 s 0.896 -2 2 -2 h 12.204 c 1.104 0 2 0.896 2 2 S 29.285 25.511 28.181 25.511 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(43, 0, 160); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+	                            <path d="M 31.413 18.441 c -0.512 0 -1.024 -0.195 -1.414 -0.586 L 21.37 9.226 c -0.781 -0.781 -0.781 -2.047 0 -2.828 c 0.78 -0.781 2.048 -0.781 2.828 0 l 8.629 8.629 c 0.781 0.781 0.781 2.047 0 2.828 C 32.437 18.246 31.925 18.441 31.413 18.441 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(10, 1, 58); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+                            </g>
+                    </svg>
+                    
+                </a> -->
+            </div>
+
+             <!-- LINK DEPENDENCIA OFICINA DE CONTRAVENCIONES -->
+
+            <div data-dependencia="contravenciones" class=" card-dependencia bg-linear-to-b from-amber-300 from-10% via-white via-30% to-white to-90% rounded-2xl p-1 hover:scale-105 transition-all duration-300 shadow-sm shadow-slate-50 border-2 border-slate-200 flex flex-col justify-between text-center relative group hover:border-[#DB8700]">
+                <!-- <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-1 bg-[#002855] h-7 -mt-4 hidden lg:block"></div> -->
+                <div>
+                    <div class="w-16 h-16 bg-[#002855] text-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
+                        
+                        <img src="src/logoContravenciones.png" class="w-20 h-20 rounded-full object-contain">
+                        
+                         <!-- <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg> -->
+                    </div>
+                    <h2 class="text-[#002855] font-black  text-lg xl:text-lg 2xl:text-lg uppercase tracking-tight min-h-[48px] flex items-center justify-center">
+                        Oficina de Contravenciones
+                    </h2>
+                    <p class="text-slate-500 font-bold xl:text-sm  2xl:text-sm text-sm text-justify mt-3 leading-relaxed">
+                        Adelanta los procesos jurídico-administrativos derivados de las infracciones de tránsito y tránsporte, gestiona el cobro de la cartera morosa por comparendos y sanciones.
+                         <!-- Es el área encargada de gestionar las multas de tránsito, los procesos legales relacionados y el cobro de comparendos pendientes. -->
+                    </p>
+                </div>
+                <!-- <a href="dependencia.html?dep=contravenciones" class="mt-6 inline-flex items-center justify-center w-full bg-[#D68700] hover:bg-[#FFA70F] text-blue-950 font-bold text-md py-2 px-4 rounded-lg shadow-sm transition duration-700 ease-in-out uppercase tracking-wider gap-1">
+                    Ver funciones
+                    <svg xmlns="http://www.w3.org/2000/svg"  xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="30" height="30" viewBox="0 0 256 256" xml:space="preserve">
+                            <g  style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
+	                            <path  d="M 69.416 43.298 H 68.97 c -0.983 0 -1.917 0.216 -2.756 0.603 c -0.644 -2.975 -3.295 -5.21 -6.459 -5.21 h -0.447 c -1.128 0 -2.19 0.284 -3.12 0.784 c -1 -2.379 -3.355 -4.054 -6.094 -4.054 h -0.447 c -0.925 0 -1.807 0.191 -2.606 0.536 v -9.458 c 0 -3.644 -2.964 -6.607 -6.608 -6.607 h -0.447 c -3.643 0 -6.607 2.964 -6.607 6.607 v 24.261 l -3.005 2.281 c -2.394 1.817 -3.911 4.461 -4.273 7.444 c -0.362 2.984 0.479 5.914 2.37 8.251 l 9.378 11.594 v 4.608 c 0 2.791 2.271 5.063 5.062 5.063 h 23.411 c 2.791 0 5.063 -2.271 5.063 -5.063 l 0.001 -4.375 c 2.996 -3.766 4.639 -8.438 4.639 -13.242 V 49.905 C 76.023 46.262 73.06 43.298 69.416 43.298 z M 72.023 67.32 c 0 4.102 -1.478 8.088 -4.159 11.224 c -0.311 0.362 -0.48 0.823 -0.48 1.3 v 5.094 c 0 0.586 -0.477 1.063 -1.063 1.063 H 42.911 c -0.585 0 -1.062 -0.477 -1.062 -1.063 v -5.316 c 0 -0.458 -0.157 -0.902 -0.445 -1.258 L 31.581 66.22 c -1.204 -1.488 -1.74 -3.354 -1.509 -5.254 c 0.23 -1.899 1.197 -3.583 2.721 -4.74 l 0.586 -0.444 v 5.495 c 0 1.104 0.896 2 2 2 s 2 -0.896 2 -2 v -9.506 c 0 -0.014 0 -0.026 0 -0.04 V 26.498 c 0 -1.438 1.169 -2.607 2.607 -2.607 h 0.447 c 1.438 0 2.607 1.17 2.607 2.607 v 15.53 c 0 0 0 0 0 0.001 s 0 0 0 0.001 l 0.01 12.917 c 0.001 1.104 0.896 1.998 2 1.998 c 0 0 0.001 0 0.001 0 c 1.104 -0.001 1.999 -0.896 1.998 -2.002 L 47.04 42.028 c 0 -1.438 1.169 -2.607 2.606 -2.607 h 0.447 c 1.438 0 2.607 1.17 2.607 2.607 v 3.27 c 0 0 0 0.001 0 0.001 c 0 0 0 0.001 0 0.001 l 0.009 9.647 c 0.001 1.104 0.896 1.998 2 1.998 c 0.001 0 0.001 0 0.002 0 c 1.104 -0.001 1.999 -0.897 1.998 -2.002 l -0.009 -9.646 c 0 -1.438 1.169 -2.607 2.606 -2.607 h 0.447 c 1.438 0 2.607 1.17 2.607 2.607 v 4.088 c -0.006 0.066 -0.02 0.13 -0.02 0.197 l 0.01 5.366 c 0.002 1.104 0.897 1.996 2 1.996 c 0.001 0 0.002 0 0.004 0 c 1.104 -0.002 1.998 -0.899 1.996 -2.004 l -0.009 -4.852 c 0.006 -0.062 0.019 -0.121 0.019 -0.184 c 0 -1.438 1.17 -2.607 2.607 -2.607 h 0.446 c 1.438 0 2.607 1.17 2.607 2.607 V 67.32 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(10, 1, 58); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+	                            <path  d="M 63.994 25.511 H 51.79 c -1.104 0 -2 -0.896 -2 -2 s 0.896 -2 2 -2 h 12.204 c 1.104 0 2 0.896 2 2 S 65.099 25.511 63.994 25.511 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(10, 1, 58); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+	                            <path  d="M 39.985 16.204 c -1.104 0 -2 -0.896 -2 -2 V 2 c 0 -1.104 0.896 -2 2 -2 s 2 0.896 2 2 v 12.204 C 41.985 15.309 41.09 16.204 39.985 16.204 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(10, 1, 58); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+	                            <path d="M 48.558 18.441 c -0.512 0 -1.023 -0.195 -1.414 -0.586 c -0.781 -0.781 -0.781 -2.047 0 -2.828 l 8.63 -8.629 c 0.781 -0.781 2.047 -0.781 2.828 0 c 0.781 0.781 0.781 2.047 0 2.828 l -8.63 8.629 C 49.581 18.246 49.069 18.441 48.558 18.441 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(10, 1, 58); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+	                            <path d="M 28.181 25.511 H 15.977 c -1.104 0 -2 -0.896 -2 -2 s 0.896 -2 2 -2 h 12.204 c 1.104 0 2 0.896 2 2 S 29.285 25.511 28.181 25.511 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(43, 0, 160); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+	                            <path d="M 31.413 18.441 c -0.512 0 -1.024 -0.195 -1.414 -0.586 L 21.37 9.226 c -0.781 -0.781 -0.781 -2.047 0 -2.828 c 0.78 -0.781 2.048 -0.781 2.828 0 l 8.629 8.629 c 0.781 0.781 0.781 2.047 0 2.828 C 32.437 18.246 31.925 18.441 31.413 18.441 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(10, 1, 58); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+                            </g>
+                    </svg> 
+                    
+                </a> -->
+            </div>
+
+             <!-- LINK DEPENDENCIA SUBSECRETARIA DE MOVILIDAD SOSTENIBLE Y SEGURIDAD VIAL -->
+
+
+            <div data-dependencia="movilidadSostenible" class="card-dependencia bg-linear-to-b from-amber-300 from-10% via-white via-30% to-white to-90% rounded-2xl p-1 hover:scale-105 transition-all duration-300 shadow-sm shadow-slate-50 border-2 border-slate-200 flex flex-col justify-between text-center relative group hover:border-[#DB8700]">
+                <!-- <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-1 bg-[#002855] h-7 -mt-4 hidden lg:block"></div> -->
+                <div>
+                    <div class="w-16 h-16 bg-[#DB8700] text-blue-950 rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
+                         <img src="src/logoMovilidadSostenible.png" class="w-full h-full  rounded-full object-cover">
+                        <!-- <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg> -->
+                    </div>
+                    <h2 class="text-[#002855] font-black  text-lg xl:text-lg 2xl:text-lg uppercase tracking-tight min-h-[48px] flex items-center justify-center">
+                        Subsecretaría de Movilidad Sostenible y Seguridad Vial
+                    </h2>
+                    <p class="text-slate-500 font-bold xl:text-sm  2xl:text-sm text-sm text-justify mt-3 leading-relaxed">
+                        <!-- Enfocada en el diseño técnico, la optimización del transporte público, la infraestructura de control de tránsito y la gestión analítica de la seguridad vial -->
+                         <!-- Planeación del transporte y promoción de la seguridad vial. -->
+                          Planea y desarrolla soluciones para mejorar la movilidad en la ciudad. Se encarga de la señalización, semáforos, estudios de tránsito, seguridad vial, planes de manejo de tráfico y proyectos que buscan hacer los desplazamientos más seguros, ordenados y sostenibles para todos los ciudadanos. 
+                         <!-- Es el área encargada de organizar el tráfico, mejorar la señalización y los semáforos, y ejecutar proyectos que hacen que moverse por la ciudad sea más seguro y ordenado.   -->
+                    </p>
+                </div>
+                <!-- <a href="dependencia.html?dep=movilidadSostenible" class="mt-6 inline-flex items-center justify-center w-full bg-[#D68700] hover:bg-[#FFA70F] text-blue-950 font-bold text-md py-2 px-4 rounded-lg shadow-sm transition duration-700 ease-in-out uppercase tracking-wider gap-1">
+                    Ver funciones
+                    <svg xmlns="http://www.w3.org/2000/svg"  xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="30" height="30" viewBox="0 0 256 256" xml:space="preserve">
+                            <g  style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
+	                            <path  d="M 69.416 43.298 H 68.97 c -0.983 0 -1.917 0.216 -2.756 0.603 c -0.644 -2.975 -3.295 -5.21 -6.459 -5.21 h -0.447 c -1.128 0 -2.19 0.284 -3.12 0.784 c -1 -2.379 -3.355 -4.054 -6.094 -4.054 h -0.447 c -0.925 0 -1.807 0.191 -2.606 0.536 v -9.458 c 0 -3.644 -2.964 -6.607 -6.608 -6.607 h -0.447 c -3.643 0 -6.607 2.964 -6.607 6.607 v 24.261 l -3.005 2.281 c -2.394 1.817 -3.911 4.461 -4.273 7.444 c -0.362 2.984 0.479 5.914 2.37 8.251 l 9.378 11.594 v 4.608 c 0 2.791 2.271 5.063 5.062 5.063 h 23.411 c 2.791 0 5.063 -2.271 5.063 -5.063 l 0.001 -4.375 c 2.996 -3.766 4.639 -8.438 4.639 -13.242 V 49.905 C 76.023 46.262 73.06 43.298 69.416 43.298 z M 72.023 67.32 c 0 4.102 -1.478 8.088 -4.159 11.224 c -0.311 0.362 -0.48 0.823 -0.48 1.3 v 5.094 c 0 0.586 -0.477 1.063 -1.063 1.063 H 42.911 c -0.585 0 -1.062 -0.477 -1.062 -1.063 v -5.316 c 0 -0.458 -0.157 -0.902 -0.445 -1.258 L 31.581 66.22 c -1.204 -1.488 -1.74 -3.354 -1.509 -5.254 c 0.23 -1.899 1.197 -3.583 2.721 -4.74 l 0.586 -0.444 v 5.495 c 0 1.104 0.896 2 2 2 s 2 -0.896 2 -2 v -9.506 c 0 -0.014 0 -0.026 0 -0.04 V 26.498 c 0 -1.438 1.169 -2.607 2.607 -2.607 h 0.447 c 1.438 0 2.607 1.17 2.607 2.607 v 15.53 c 0 0 0 0 0 0.001 s 0 0 0 0.001 l 0.01 12.917 c 0.001 1.104 0.896 1.998 2 1.998 c 0 0 0.001 0 0.001 0 c 1.104 -0.001 1.999 -0.896 1.998 -2.002 L 47.04 42.028 c 0 -1.438 1.169 -2.607 2.606 -2.607 h 0.447 c 1.438 0 2.607 1.17 2.607 2.607 v 3.27 c 0 0 0 0.001 0 0.001 c 0 0 0 0.001 0 0.001 l 0.009 9.647 c 0.001 1.104 0.896 1.998 2 1.998 c 0.001 0 0.001 0 0.002 0 c 1.104 -0.001 1.999 -0.897 1.998 -2.002 l -0.009 -9.646 c 0 -1.438 1.169 -2.607 2.606 -2.607 h 0.447 c 1.438 0 2.607 1.17 2.607 2.607 v 4.088 c -0.006 0.066 -0.02 0.13 -0.02 0.197 l 0.01 5.366 c 0.002 1.104 0.897 1.996 2 1.996 c 0.001 0 0.002 0 0.004 0 c 1.104 -0.002 1.998 -0.899 1.996 -2.004 l -0.009 -4.852 c 0.006 -0.062 0.019 -0.121 0.019 -0.184 c 0 -1.438 1.17 -2.607 2.607 -2.607 h 0.446 c 1.438 0 2.607 1.17 2.607 2.607 V 67.32 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(10, 1, 58); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+	                            <path  d="M 63.994 25.511 H 51.79 c -1.104 0 -2 -0.896 -2 -2 s 0.896 -2 2 -2 h 12.204 c 1.104 0 2 0.896 2 2 S 65.099 25.511 63.994 25.511 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(10, 1, 58); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+	                            <path  d="M 39.985 16.204 c -1.104 0 -2 -0.896 -2 -2 V 2 c 0 -1.104 0.896 -2 2 -2 s 2 0.896 2 2 v 12.204 C 41.985 15.309 41.09 16.204 39.985 16.204 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(10, 1, 58); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+	                            <path d="M 48.558 18.441 c -0.512 0 -1.023 -0.195 -1.414 -0.586 c -0.781 -0.781 -0.781 -2.047 0 -2.828 l 8.63 -8.629 c 0.781 -0.781 2.047 -0.781 2.828 0 c 0.781 0.781 0.781 2.047 0 2.828 l -8.63 8.629 C 49.581 18.246 49.069 18.441 48.558 18.441 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(10, 1, 58); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+	                            <path d="M 28.181 25.511 H 15.977 c -1.104 0 -2 -0.896 -2 -2 s 0.896 -2 2 -2 h 12.204 c 1.104 0 2 0.896 2 2 S 29.285 25.511 28.181 25.511 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(43, 0, 160); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+	                            <path d="M 31.413 18.441 c -0.512 0 -1.024 -0.195 -1.414 -0.586 L 21.37 9.226 c -0.781 -0.781 -0.781 -2.047 0 -2.828 c 0.78 -0.781 2.048 -0.781 2.828 0 l 8.629 8.629 c 0.781 0.781 0.781 2.047 0 2.828 C 32.437 18.246 31.925 18.441 31.413 18.441 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(10, 1, 58); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+                            </g>
+                    </svg> 
+                   
+                </a> -->
+            </div>
+
+            <!-- LINK DEPENDENCIA SUBSECRETARIA DE SERVICIOS DE MOVILIDAD -->    
+
+            <div data-dependencia="serviciosMovilidad"  class="card-dependencia bg-linear-to-b from-amber-300 from-10% via-white via-30% to-white to-90% rounded-2xl p-1 hover:scale-105 transition-all duration-300 shadow-sm shadow-slate-50 border-2 border-slate-200 flex flex-col justify-between text-center relative group hover:border-[#DB8700]">
+                <!-- <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-1 bg-[#002855] h-7 -mt-4 hidden lg:block"></div> -->
+                <div>
+                    <div class="w-16 h-16 bg-[#002855] text-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
+                        <img src="src/logoServiciosMovilidad.png" class="w-full h-full  rounded-full object-cover">
+                        <!-- <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                        </svg> -->
+                    </div>
+                    <h2 class="text-[#002855] font-black  text-lg xl:text-lg 2xl:text-lg uppercase tracking-tight min-h-[48px] flex items-center justify-center">
+                        Subsecretaría de Servicios de Movilidad
+                    </h2>
+                    <p class="text-slate-500 font-bold xl:text-sm  2xl:text-sm text-sm text-justify mt-3 leading-relaxed">
+                        Controla y regula la movilidad en las vías de Cali. Gestiona el registro del parque automotor y los trámites ante el RUNT, autoriza eventos que afecten la circulación y administra las tecnologías de control vial como cámaras y sistemas inteligentes.
+                        <!-- Es el área encargada de regular el tránsito, gestionar el registro de vehículos y trámites, y supervisar los sistemas de control vial y permisos de circulación en la ciudad. -->
+                    </p>
+                </div>
+               
+            </div>
+
+        </div>
+
+        <div class="w-full max-w-[1200px] shadow-md shadow-orange-400 mx-auto bg-[#002855] border border-white/20 mt-1 p-1 rounded-2xl text-center shadow-lg flex flex-col md:flex-row items-center justify-center gap-4">
+            <div class="w-14 h-14 rounded-full border border-white/40 flex items-center justify-center text-white shrink-0">
+                
+                 <img src="src/logo2opts.png" class="w-full h-full  rounded-full object-cover">
+
+            </div>
+            <p class="text-white text-base md:text-md xl:text-xl 2xl:text-2xl font-medium">
+                Nuestro propósito es <span class="text-[#DB8700] font-bold">simplificar los trámites</span> y garantizar una atención <span class="text-[#DB8700] font-bold">eficiente, transparente y orientada</span> a resolver sus necesidades.
+            </p>
+        </div>
+
+        <div class="w-full max-w-[1200px] mx-auto bg-white rounded-full mt-1 py-1 px-6 shadow-md flex items-center justify-between border border-slate-200">
+            
+            <div class="w-16 h-16 bg-[#DB8700] text-blue-950 rounded-full flex items-center justify-center font-bold">
+                <img src="src/logo_multidireccion.png" class="w-full h-full rounded-full object-fill">
+            </div>
+            <p class="text-slate-700 font-bold text-xs md:text-md xl:text-xl 2xl:text-2xl md:text-sm text-center flex-grow px-2">
+                Ubique el cursor sobre la <span class="text-blue-800 ">dependencia</span> relacionada con su requerimiento para continuar.
+            </p>
+            
+            
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672 13.684 16.6m0 0-2.51 2.225.569-9.47 5.227 7.917-3.286-.672ZM12 2.25V4.5m5.834.166-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243-1.59-1.59" />
+            </svg>
+
+        </div>
+
+    </main>
+
+        <!-- informacion depedencia -->
+        <div id="previewDependencia" class=" fixed z-50 bg-white rounded-xl shadow-2xl border p-1 pt-2 overflow-x-hidden border-1 border-blue-800 rounded-lg w-[500px] max-h-[80vh] overflow-y-auto opacity-0 invisible -translate-x-4 transition-all duration-300 ease-out 
+            [&::-webkit-scrollbar]:w-1
+            [&::-webkit-scrollbar-track]:bg-amber-300
+            [&::-webkit-scrollbar-thumb]:bg-amber-300">
+
+             
+            <div class="flex flex-col border-b-2 rounded-lg border-blue-700 p-1">
+
+                <h3 id="previewNombre" class="text-xl font-bold text-[#002855] mb-1"></h3>
+                <p id="previewCodigo" class="text-sm text-slate-500 font-bold mb-2"></p>
+
+            </div>    
+
+            <p id="previewDescripcion" class="font-bold text-justify text-sm border-1 border-slate-700 bg-slate-200 rounded-md p-2 text-slate-700 text-justify my-2"></p>
+            <div id="previewFunciones" class="mt-2 max-h-96 overflow-y-auto overflow-x-hidden pr-1  [&::-webkit-scrollbar]:w-1
+            [&::-webkit-scrollbar-track]:bg-amber-300
+            [&::-webkit-scrollbar-thumb]:bg-amber-300" ></div>
+
+        </div>
+       <!-- informacion depedencia --> 
+
+        <!-- modal informativo visita presencial -->
+
+        <div id="modalInformativo" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+
+            <div class="bg-white rounded-2xl shadow-xl max-w-md w-11/12 p-6">
+
+             <div class="flex items-center gap-3 mb-4">
+
+                <div class="flex h-12 w-12 items-center justify-center rounded-full bg-amber-100">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.29 3.86l-7.2 12.47A2 2 0 004.8 21h14.4a2 2 0 001.71-3.03l-7.2-12.47a2 2 0 00-3.42 0z"/>
+
+                    </svg>
+
+                </div>
+
+                <h2 class="text-xl font-bold text-[#002855]">
+                 Información importante
+                </h2>
+
+            </div>
+
+                <p id="mensajeModal" class="text-gray-700 text-justify mb-6"></p>
+
+                <div class="text-right">
+
+                    <button id="btnCerrarModal" class="bg-[#002855] text-white px-4 py-2 rounded-lg">
+                    Entendido
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- modal informativo visita presencial -->
+
+        
+    <footer class="w-full bg-[#00152e] text-slate-100 p-6 text-center text-[11px] font-bold border-t border-[#F2AD43] z-10">
+        &copy; 2026 Alcaldía Distrital de Santiago de Cali. Nit: 890.399.011-3 <br>
+        Formulario Inteligente de Radicación - Cumplimiento de Estándares de Gobierno Digital.
+    </footer>
+
+<script type="module" src="js/script-opts.js"></script>
+</body>
+</html>
