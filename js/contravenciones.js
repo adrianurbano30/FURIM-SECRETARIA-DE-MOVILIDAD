@@ -53,6 +53,33 @@ export const ARBOL_CONTRAVENCIONES = {
                                 ]
 
                             }
+                            
+
+                        },
+                        //COomparendo IUIT(INFORME UNITCO DE INFRACCION AL TRANSPORTE)
+                        {
+                            id: "COMPARENDOIUIT",
+                            label: "Comparendo IUIT (Informe Único De Infracción Al Transporte)",
+                            siguiente: null
+
+                            // siguiente: {
+
+                            //     pregunta: "¿Qué desea consultar?",
+
+                            //     opciones: [
+
+                            //         {
+                            //             id: "comparendo_iuit",
+                            //             label: "Comparendo IUIT",
+                            //             siguiente: null
+                            //         },
+
+                                   
+
+                            //     ]
+
+                            // }
+                            
 
                         },
                         //SOLICITAR COPIA EXPEDIENTE

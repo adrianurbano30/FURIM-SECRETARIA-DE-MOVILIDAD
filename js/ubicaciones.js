@@ -32,3 +32,95 @@
   { departamento: "Vaupés", municipios: ["Carurú", "Mitú", "Taraira"] },
   { departamento: "Vichada", municipios: ["Cumaribo", "La Primavera", "Puerto Carreño", "Santa Rosalía"] }
 ];
+
+// Países y divisiones indicados para el formulario de radicación.
+// En las entradas de una sola división, el nombre se usa como departamento
+// y como municipio, siguiendo el catálogo que se está replicando.
+const divisionesUnicas = [
+  ['Antigua y Barbuda', 'Saint John'],
+  ['Argentina', 'Buenos Aires'],
+  ['Bahamas', 'Nassau'],
+  ['Barbados', 'Bridgetown'],
+  ['Bermudas', 'Hamilton'],
+  ['Bolivia', 'La Paz'],
+  ['Brasil', 'Brasilia'],
+  ['Belice', 'Belmopan'],
+  ['Islas Vírgenes Británicas', 'Islas Vírgenes Británicas'],
+  ['Canadá', 'Ottawa'],
+  ['Islas Caimán', 'Georgetown'],
+  ['Chile', 'Santiago de Chile'],
+  ['Costa Rica', 'San José'],
+  ['Cuba', 'La Habana'],
+  ['Dominica', 'Roseau'],
+  ['República Dominicana', 'Santo Domingo'],
+  ['El Salvador', 'San Salvador'],
+  ['Islas Malvinas', 'Port Stanley'],
+  ['Islas Georgias del Sur', 'Islas Georgias del Sur'],
+  ['Guayana Francesa', 'Georgetown'],
+  ['Groenlandia', 'Nuuk'],
+  ['Granada', 'Granada'],
+  ['Guadalupe', 'Basse-Terre'],
+  ['Guatemala', 'Ciudad de Guatemala'],
+  ['Guyana', 'Georgetown'],
+  ['Haití', 'Port au Prince'],
+  ['Honduras', 'Tegucigalpa'],
+  ['Jamaica', 'Kingston'],
+  ['Martinica', 'Fort de France'],
+  ['México', 'MEXICO'],
+  ['Montserrat', 'Plymouth'],
+  ['Antillas Holandesas', 'Willemstad'],
+  ['Aruba', 'Oranjestad'],
+  ['Nicaragua', 'Managua'],
+  ['Panamá', 'Panamá'],
+  ['Paraguay', 'Asunción'],
+  ['Perú', 'Lima'],
+  ['Puerto Rico', 'San Juan'],
+  ['San Cristóbal y Nieves', 'San Cristóbal y Nieves'],
+  ['Anguila', 'The Valley'],
+  ['Santa Lucía', 'Castries'],
+  ['San Pedro y Miquelón', 'Saint Pierre'],
+  ['San Vicente y las Granadinas', 'Kingstown'],
+  ['Surinam', 'Paramaribo'],
+  ['Trinidad y Tobago', 'Port-of Spain'],
+  ['Islas Turcas y Caicos', 'Cockburn Town'],
+  ['Islas Vírgenes', 'Road Town'],
+  ['Uruguay', 'Montevideo']
+];
+
+const paisesConDivisionUnica = Object.fromEntries(
+  divisionesUnicas.map(([pais, division]) => [
+    pais,
+    [{ departamento: division, municipios: [division] }]
+  ])
+);
+
+export const UBICACIONES_POR_PAIS = {
+  Colombia: COLOMBIA,
+  ...paisesConDivisionUnica,
+  Ecuador: [
+    {
+      departamento: 'Quito',
+      municipios: ['Quito']
+    },
+    {
+      departamento: 'Pichincha',
+      municipios: [
+        'Quito',
+        'Cayambe',
+        'Mejía',
+        'Pedro Moncayo',
+        'Pedro Vicente Maldonado',
+        'Puerto Quito',
+        'Rumiñahui',
+        'San Miguel de los Bancos'
+      ]
+    }
+  ],
+  'Estados Unidos': [
+    { departamento: 'Florida', municipios: ['Miami'] },
+    { departamento: 'Washington', municipios: ['Washington'] }
+  ],
+  Venezuela: [
+    { departamento: 'DISTRITO CAPITAL', municipios: ['CARACAS'] }
+  ]
+};

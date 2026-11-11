@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secretaria de Movilidad</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="src/tailwind.generated.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -19,8 +19,39 @@
 
         
         <!-- MODALES  -->
+                                                                                              
+    <div id="modalInfoPaso3" onclick="if(event.target == this) cerrarmodalInfoPaso3()" class="fixed inset-0  bg-black/60 flex items-center justify-center z-50   p-2 opacity-0 pointer-events-none  sm:p-4 transition-opacity hidden duration-500 ease-out">
+                                                 <!-- rounded-xl max-w-[740px] w-full min-h-[450px] sm:min-h-[550px]  2xl:min-h-[690px] 2xl:min-h-[700px] max-h-[90vh] shadow-2xl overflow-hidden transform transition-all duration-200 ease-out border border-orange-200 flex flex-col                                                   -->
+        <div id="modalContendioInfopaso3" class="flex w-full max-w-3xl max-h-[calc(100dvh-1rem)] sm:max-h-[calc(100dvh-1rem)] flex-col overflow-hidden rounded-md bg-white shadow-2xl transform transition-all duration-200 ease-out">
+           
+            <div class="flex items-center justify-between gap-3 bg-[#be941e] px-3 py-2 text-white sm:px-5">
+                <h2 id="modalTitulo" class="text-2xl font-bold sm:text-xl">Información  en el paso 3 detalles y soportes</h2>
+                <button data-cerrar onclick="cerrarmodalInfoPaso3()" aria-label="Cerrar" class="text-3xl leading-none opacity-80 hover:opacity-100 focus-visible:outline focus-visible:outline-2 cursor-pointer focus-visible:outline-yellow-400">
+                    &times;
+                </button>
+            </div>
 
-    <div id="modalAnonimo" onclick="if(event.target == this) cerrarModalAnonimo()" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden p-4 animate-fade-in">
+        <div class="flex-1 overflow-y-auto px-4 py-5 leading-relaxed sm:px-5">
+            <p class="mb-3 text-justify">
+                <span class="font-bold text-lg mb-2">Es importante que identifiques y nos brindes la información para realizar la solicitud rápidamente teniendo en cuenta:</span> <br>
+                <span class="text-md">Identificación original en el paso 1 </span><br>
+                <span class="text-md">Función o asunto seleccionada acorde a tu requerimiento</span><br>
+                <span class="text-md">Documentos adjuntos que se requieran para la solicitud</span>
+            </p>
+            <p class="font-bold text-lg text-center">Sin clara argumentación en el contenido de la petición, documentos adjuntos insuficientes retrasará el proceso PQRS</p>
+
+           
+      </div>
+            
+        <div class="flex justify-center border-t border-gray-200 px-4 py-3.5 sm:px-5">
+            <button onclick="cerrarmodalInfoPaso3()" data-cerrar class="w-full rounded-lg  bg-[#045153]  px-6 cursor-pointer py-2.5 font-semibold text-white hover:bg-[#04878b] sm:w-auto focus-visible:outline focus-visible:outline-2 transition duration-500 focus-visible:outline-offset-2 focus-visible:outline-yellow-400">
+            Entendido
+            </button>
+        </div>
+        </div>
+    </div>    
+
+    <div id="modalAnonimo" onclick="if(event.target == this) cerrarModalAnonimo()" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden p-4 transition-opacity duration-500 ease-out">
         <div class="bg-white rounded-2xl max-w-[600px] w-full shadow-2xl overflow-hidden transform transition-all border border-slate-200">
             <div class="bg-[#002855] text-white px-6 py-4 flex items-center justify-between relative">
                 <div class="absolute top-0 left-0 right-0 h-1 bg-[#DB8700]"></div>
@@ -50,6 +81,7 @@
     </div>
 
     <div id="modalExito" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden p-4">
+
         <div class="bg-white rounded-2xl max-w-[650px] w-full shadow-2xl overflow-hidden transform transition-all border border-slate-200 text-center relative flex flex-col max-h-[90vh]">
             <div class="absolute top-0 left-0 right-0 h-2 bg-[#002855]"></div>
             
@@ -58,30 +90,26 @@
                     <span class="text-emerald-500 text-3xl font-bold">✓</span>
                 </div>
                 <div class="space-y-1">
-                    <h3 class="text-xl font-black text-[#002855] uppercase tracking-tight">¡Radicación Exitosa!</h3>
-                    <p class="text-xs text-slate-500 font-medium">Registro oficial en el sistema de la Secretaría de Movilidad de Cali</p>
+                    <h3 id="tituloModalRadicacion" class="text-xl font-black text-[#002855] uppercase tracking-tight">¡Radicación Exitosa!</h3>
+                    <p id="subtituloModalRadicacion" class="text-xs text-slate-500 font-medium">Verifica la información antes de confirmar el envío.</p>
                 </div>
             </div>
 
             <div class="p-6 overflow-y-auto space-y-4 text-left">
                 
-                <div class="bg-[#002855] text-white p-4 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
-                    <!-- <div>
-                        <span class="block text-[10px] font-bold uppercase tracking-wider text-slate-300">Número de Radicado</span>
-                        <span id="lblNumRadicado" class="text-xl font-black text-[#DB8700] tracking-wide">---</span>
-                    </div> -->
-                    <div class="sm:text-right">
-                        <span class="block text-[10px] font-bold uppercase tracking-wider text-slate-300">Fecha y Hora de Registro</span>
+                <div class="bg-[#002855] text-white p-4 rounded-xl flex flex-col sm:flex-row justify-center items-center sm:items-center gap-2">
+                    <div class="flex flex-col items-center justify-center  sm:text-right">
+                        <span class="block text-xl  sm:text-[10px] font-bold uppercase tracking-wider text-slate-300">Fecha y Hora de Registro</span>
                         <span id="lblResumenFecha" class="text-xs font-bold block text-white">---</span>
                     </div>
                 </div>
 
                 <div class="border border-slate-200 rounded-xl overflow-hidden bg-slate-50 text-xs">
                     <div class="bg-slate-200/60 px-4 py-2 font-black text-[#002855] uppercase tracking-wider border-b border-slate-200">
-                        Resumen del Requerimiento Guardado
+                        Resumen de la radicación
                     </div>
                     <div id="contenedorListaDatos" class="divide-y divide-slate-200">
-                        </div>
+                    </div>
                 </div>
 
                 <p class="text-[11px] text-slate-500 leading-relaxed text-center max-w-[500px] mx-auto pt-2">
@@ -89,13 +117,27 @@
                 </p>
             </div>
 
-            <div class="px-6 py-4 bg-slate-50 border-t border-slate-150 flex justify-center shrink-0">
-                <button type="button" onclick="finalizarTodo()" class="w-full bg-[#002855] hover:bg-blue-900 text-white font-black py-3.5 rounded-xl text-xs uppercase tracking-widest transition-all cursor-pointer shadow-md">
-                    Entendido y Volver al Inicio
+           
+
+            <div class="p-6 pt-0 shrink-0 flex flex-col sm:flex-row gap-3">
+            
+                <button type="button" id="btnVolverRevision" onclick="volverARevision()" class="w-full bg-slate-100 hover:bg-slate-200 text-[#002855] font-bold py-4 px-4 rounded-xl text-xs uppercase tracking-wider transition-all">
+                    Volver y corregir
                 </button>
+
+                <button type="button" id="btnConfirmarRadicacion" onclick="confirmarEnvioRadicacion()" class="w-full bg-[#DB8700] hover:bg-amber-600 text-blue-950 font-black py-4 px-4 rounded-xl text-xs uppercase tracking-widest shadow-md transition-all">
+                    Confirmar envío
+                </button>
+
             </div>
+
         </div>
     </div>
+
+    <div id="modfinal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden p-4">
+        <div id="modfinalContenido" class="bg-white rounded-2xl max-w-[600px] w-full shadow-2xl overflow-hidden transform transition-all border border-slate-200"></div>
+    </div>
+
 
        <!-- FIN MODALES -->
 
@@ -112,7 +154,7 @@
                     <!-- FIN NOMBRE DEPENDENCIA -->
 
             </div>
-            <a href="opts.html" class="inline-flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-[#002855] font-bold text-sm px-4 py-2 rounded-xl transition-all border border-slate-300 shadow-xs gap-2 self-center sm:self-auto shrink-0">
+            <a href="opts.html" class="inline-flex  items-center justify-center bg-slate-100 hover:scale-105 text-[#002855] font-bold text-sm px-4 py-2 rounded-xl transition duration-500 border border-slate-300 shadow-xs gap-2 self-center sm:self-auto shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg"  xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="36" height="36" viewBox="0 0 256 256" xml:space="preserve">
                             <g  style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
 	                            <path  d="M 69.416 43.298 H 68.97 c -0.983 0 -1.917 0.216 -2.756 0.603 c -0.644 -2.975 -3.295 -5.21 -6.459 -5.21 h -0.447 c -1.128 0 -2.19 0.284 -3.12 0.784 c -1 -2.379 -3.355 -4.054 -6.094 -4.054 h -0.447 c -0.925 0 -1.807 0.191 -2.606 0.536 v -9.458 c 0 -3.644 -2.964 -6.607 -6.608 -6.607 h -0.447 c -3.643 0 -6.607 2.964 -6.607 6.607 v 24.261 l -3.005 2.281 c -2.394 1.817 -3.911 4.461 -4.273 7.444 c -0.362 2.984 0.479 5.914 2.37 8.251 l 9.378 11.594 v 4.608 c 0 2.791 2.271 5.063 5.062 5.063 h 23.411 c 2.791 0 5.063 -2.271 5.063 -5.063 l 0.001 -4.375 c 2.996 -3.766 4.639 -8.438 4.639 -13.242 V 49.905 C 76.023 46.262 73.06 43.298 69.416 43.298 z M 72.023 67.32 c 0 4.102 -1.478 8.088 -4.159 11.224 c -0.311 0.362 -0.48 0.823 -0.48 1.3 v 5.094 c 0 0.586 -0.477 1.063 -1.063 1.063 H 42.911 c -0.585 0 -1.062 -0.477 -1.062 -1.063 v -5.316 c 0 -0.458 -0.157 -0.902 -0.445 -1.258 L 31.581 66.22 c -1.204 -1.488 -1.74 -3.354 -1.509 -5.254 c 0.23 -1.899 1.197 -3.583 2.721 -4.74 l 0.586 -0.444 v 5.495 c 0 1.104 0.896 2 2 2 s 2 -0.896 2 -2 v -9.506 c 0 -0.014 0 -0.026 0 -0.04 V 26.498 c 0 -1.438 1.169 -2.607 2.607 -2.607 h 0.447 c 1.438 0 2.607 1.17 2.607 2.607 v 15.53 c 0 0 0 0 0 0.001 s 0 0 0 0.001 l 0.01 12.917 c 0.001 1.104 0.896 1.998 2 1.998 c 0 0 0.001 0 0.001 0 c 1.104 -0.001 1.999 -0.896 1.998 -2.002 L 47.04 42.028 c 0 -1.438 1.169 -2.607 2.606 -2.607 h 0.447 c 1.438 0 2.607 1.17 2.607 2.607 v 3.27 c 0 0 0 0.001 0 0.001 c 0 0 0 0.001 0 0.001 l 0.009 9.647 c 0.001 1.104 0.896 1.998 2 1.998 c 0.001 0 0.001 0 0.002 0 c 1.104 -0.001 1.999 -0.897 1.998 -2.002 l -0.009 -9.646 c 0 -1.438 1.169 -2.607 2.606 -2.607 h 0.447 c 1.438 0 2.607 1.17 2.607 2.607 v 4.088 c -0.006 0.066 -0.02 0.13 -0.02 0.197 l 0.01 5.366 c 0.002 1.104 0.897 1.996 2 1.996 c 0.001 0 0.002 0 0.004 0 c 1.104 -0.002 1.998 -0.899 1.996 -2.004 l -0.009 -4.852 c 0.006 -0.062 0.019 -0.121 0.019 -0.184 c 0 -1.438 1.17 -2.607 2.607 -2.607 h 0.446 c 1.438 0 2.607 1.17 2.607 2.607 V 67.32 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(43, 0, 160); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
@@ -131,14 +173,14 @@
 
     <main class="flex-grow w-full max-w-[850px] mx-auto px-4 py-6 z-10 space-y-6 items-center justify-center border border-slate-300 mb-0 xl:mb-4 mt-0 xl:mt-2 rounded-lg shadow-md shadow-blue-300">
 
-            <section class="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm relative overflow-hidden items-center justify-center">
+            <section class="bg-white border border-slate-200 p-2 rounded-2xl shadow-sm relative overflow-hidden items-center justify-center">
             
                 <div class="flex items-center justify-center gap-3 mb-4 border-b-3 rounded-xl border-blue-950 pb-3 self-auto">
                     <div class="w-9 h-9 bg-[#002855] rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-xs">📋</div>
 
 
                     <div>
-                        <h2 class="text-base font-bold text-[#002855] uppercase tracking-wide">Funciones del equipo de trabajo</h2>
+                        <h2 id="TituloFuncionesEquipo" class="text-base font-bold text-[#002855] uppercase tracking-wide">Funciones del equipo de trabajo</h2>
                         <!-- CODIGO DE REFERENCIA    -->
                         <div class="flex flex-grow text-base text-slate-500 font-bold">Còdigo de referencia <p id="codigoDependencia" class="pl-2 text-base text-slate-500 font-bold "></p></div>
                         <!--END  CODIGO DE REFERENCIA    -->
@@ -150,7 +192,7 @@
 
                 <!-- mensaje de inicio  -->
 
-                <div id="mensajeInicio" class="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6">
+                <div id="mensajeInicio" class="bg-blue-50 border-2 border-blue-200 rounded-xl p-4 mb-6">
 
                     <div class="flex items-start gap-3">
 
@@ -164,9 +206,9 @@
                                     Información
                                 </h3>
 
-                                <p class="text-sm text-slate-700 text-justify mt-1">
+                                <p id="infoDependenciafunciones" class="text-sm text-slate-700 text-justify mt-1">
                                     <!-- Para iniciar el proceso de radicación, seleccione una de las funciones disponibles del equipo de trabajo. Una vez seleccionada la función, se habilitará el formulario correspondiente. -->
-                                    Para iniciar el proceso de radicación, seleccione una de las funciones disponibles del equipo de trabajo.
+                                     Para iniciar el proceso de radicación, seleccione una de las funciones disponibles del equipo de trabajo.
                                     La función seleccionada determinará el asunto inicial de su solicitud y habilitará el formulario correspondiente.
                                     Si ninguna opción se ajusta a su requerimiento, seleccione  <span class="font-bold">"Otro"</span>  y escriba el asunto manualmente.
                                 </p>
@@ -181,12 +223,13 @@
 
                 <!-- FUNCIONES DEL EQUIPO DE TRABAJO: -->
 
-                 
+                 <!-- contendedor de funciones en el formulario seleccionables condicionalmente de dependencia -->
 
-                 <div id="contenedorFunciones" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 gap-2 text-justify text-sm xl:text-base mt-8 text-blue-950 ">
-                 </div>
+                 <div id="contenedorFunciones" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2  gap-2 text-justify text-sm xl:text-base mt-2 text-blue-950 "></div>
 
-                 <div id="resumenSeleccion" class="hidden flex flex-col gap-1 mt-2"></div>
+                 <!-- resumen de la seleccion  -->
+
+                 <div id="resumenSeleccion" class="hidden flex flex-col gap-1  mt-3"></div>
             
             
                 <!--END FUNCIONES DEL EQUIPO DE TRABAJO: -->
@@ -206,6 +249,10 @@
                     <!-- PASO 1 -->
 
                    <div id="capa-paso1" class="space-y-5">
+                         
+                        <div class="text-justify border border-orange-400 rounded-lg p-2">
+                            1. Información básica, ubicación, correo electronico de la persona u organización  a quien hace la solicitud, los datos ingresados aquí serán usados para notificarle la respuesta a esta solicitud.
+                        </div>
 
                          <div class="border-l-4 border-[#002855] pl-3 mb-2">
                                 <h3 class="text-base font-black text-[#002855] uppercase tracking-tight">Datos del Solicitante</h3>
@@ -219,96 +266,30 @@
                         </div>
 
                         <div id="bloqueSelectorMaestro">
-                            <label class="block text-xs font-bold text-[#002855] uppercase mb-1">Tipo de Solicitante *</label>
-                            <select id="cmbTipoSolicitante" required onchange="controlarFlujoCampos(this.value)" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700] focus:bg-white transition-all">
-                                <option value="" disabled selected>- Seleccione -</option>
-                                <option value="natural">Persona Natural</option>
-                                <option value="juridica">Persona Jurídica</option>
-                                <option value="menor">Niño, Niña o Adolescente</option>
-                                <option value="apoderado">Apoderado / Tercero</option>
-                            </select>
+                            <label class="block text-xs font-bold text-[#002855] uppercase mb-1">Tipo de Solicitante *:</label>
+                            <div class="flex flex-row items-center gap-3">
+                                <select id="cmbTipoSolicitante" required onchange="controlarFlujoCampos(this.value)" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700] focus:bg-white transition-all">
+                                    <option value="" disabled selected>- Seleccione -</option>
+                                    <option value="natural">Persona Natural</option>
+                                    <option value="juridica">Persona Jurídica</option>
+                                    <option value="menor">Niño, Niña o Adolescente</option>
+                                    <option value="apoderado">Apoderado / Tercero</option>
+                                </select>
+                                <div class="relative group focus-within:outline-none" tabindex="0">
+                                    <div class="border-2 border-orange-700 font-bold bg-orange-500 rounded-full text-white text-lg h-7 w-7 flex transition-duration-300 items-center justify-center">
+                                        ?
+                                    </div>
+                                    <div class="absolute z-50 -left-[30%] -translate-x-1/2 top-full mt-2  2xl:w-64 xl:w-64 md:w-auto sm:w-auto text-justify rounded-md bg-white text-slate-800 text-md p-3 shadow-md shadow-orange-200 opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto">
+                                        Selecciona a quien refiere la solicitud.
+                                    </div>
+                                </div>    
+                            </div>
                         </div>
 
                         <!-- bloque datos personales -->
 
 
-                       <!-- <div id="bloqueDatosPersonales" class="hidden space-y-5">
-
-                             <div id="camposNombres" class="space-y-5">
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <div>
-                                      <label class="block text-xs font-bold text-[#002855] uppercase mb-1">Primer Nombre *</label>
-                                      <input oninput="actualizarDatosSolicitante()" type="text" id="txtPrimerNombre" placeholder="Obligatorio" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
-                                    </div>
-                                    <div>
-                                      <label class="block text-xs font-bold text-[#002855] uppercase mb-1">Segundo Nombre</label>
-                                      <input oninput="actualizarDatosSolicitante()" type="text" id="txtSegundoNombre" placeholder="No obligatorio" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
-                                    </div>
-                                </div>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <div>
-                                      <label class="block text-xs font-bold text-[#002855] uppercase mb-1">Primer Apellido *</label>
-                                      <input oninput="actualizarDatosSolicitante()" type="text" id="txtPrimerApellido" placeholder="Obligatorio" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
-                                    </div>
-                                    <div>
-                                      <label class="block text-xs font-bold text-[#002855] uppercase mb-1">Segundo Apellido</label>
-                                      <input oninput="actualizarDatosSolicitante()" type="text" id="txtSegundoApellido" placeholder="No obligatorio" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="campoRazonSocial" class="hidden">
-                               <label class="block text-xs font-bold text-[#002855] uppercase mb-1">Razón Social / Entidad *</label>
-                               <input type="text" oninput="actualizarDatosSolicitante()" id="txtRazonSocial" placeholder="Escriba el nombre de la empresa o entidad" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
-                            </div>
-
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                  <label class="block text-xs font-bold text-[#002855] uppercase mb-1">Tipo de identificación *</label>
-                                  
-                                  <select id="txtTipoDoc" onchange="evaluarsubDocumentoOtro(this.value)" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
-                                     <option value="" disabled selected>
-                                        - Seleccione -
-                                     </option>
-                                  </select>
-
-                                </div>
-
-                                <div>
-                                   <label class="block text-xs font-bold text-[#002855] uppercase mb-1">Número de documento *</label>
-                                   <input type="text" oninput="actualizarDatosSolicitante()" id="txtDoc" placeholder="Obligatorio" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
-                                </div>
-
-                                <div id="bloqueDocumentoOtro" class="hidden">
-                                    <label class="block text-xs font-bold text-[#002855] uppercase mb-1">¿Cuál tipo de documento? *</label>
-                                    <div>
-                                        <input type="text" oninput="actualizarDatosSolicitante()" id="txtCualDocumento" placeholder="Especifique el tipo de documento" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
-                                    </div>   
-                                </div>
-
-                                
-
-                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div>
-                                  <label class="block text-xs font-bold text-[#002855] uppercase mb-1">Correo Electrónico *</label>
-                                  <input type="email" oninput="actualizarDatosSolicitante()" id="txtCorreo" placeholder="ejemplo@correo.com" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
-                                </div>
-                                <div>
-                                   <label class="block text-xs font-bold text-[#002855] uppercase mb-1">Dirección de Residencia *</label>
-                                   <input type="text" oninput="actualizarDatosSolicitante()" id="txtDireccion" placeholder="Ej: Calle 5 # 10-20" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
-                                </div>
-                             </div>
-
-                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div>
-                                  <label class="block text-xs font-bold text-[#002855] uppercase mb-1">Número de teléfono móvil</label>
-                                  <input type="tel" oninput="actualizarDatosSolicitante()" id="txtCelular" placeholder="Ej: 315XXXXXXX" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
-                                </div>
-                                <div>
-                                  <label class="block text-xs font-bold text-[#002855] uppercase mb-1">Teléfono Fijo</label>
-                                  <input type="tel" oninput="actualizarDatosSolicitante()" id="txtFijo" placeholder="Ej: 602XXXXXXX" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
-                                </div>
-                            </div>
-                       </div> -->
+             
 
                     <div id="bloqueDatosPersonales" class="hidden space-y-5">
 
@@ -319,18 +300,36 @@
 
                                 <div>
                                    <label class="block text-xs font-bold text-[#002855] uppercase mb-1">
-                                   Primer Nombre *
+                                   Primer Nombre <span class="place-self-start text-xs">*</span>:
                                    </label>
-
-                                   <input type="text" id="txtPrimerNombre" oninput="actualizarDatosSolicitante()" placeholder="Obligatorio" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
+                                   <div class="flex flex-row items-center gap-2">
+                                        <input type="text" id="txtPrimerNombre" oninput="actualizarDatosSolicitante()" placeholder="Obligatorio" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
+                                        <div class="relative group focus-within:outline-none" tabindex="0">
+                                            <div class="border-2 border-orange-700 font-bold bg-orange-500 rounded-full text-white text-lg h-7 w-7 flex transition-duration-300 items-center justify-center">
+                                                ?
+                                            </div>
+                                            <div class="absolute z-50 -left-30 -translate-x-1/2 top-full mt-2  w-64 text-justify rounded-md bg-white text-slate-800 text-md p-3 shadow-md shadow-orange-200 opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto">
+                                                Escribe tu primner nombre, recuerda que en este campo solo debes escribir texto.
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div>
                                   <label class="block text-xs font-bold text-[#002855] uppercase mb-1">
-                                      Segundo Nombre
+                                      Segundo Nombre:
                                   </label>
-
-                                  <input type="text" id="txtSegundoNombre" oninput="actualizarDatosSolicitante()" placeholder="No obligatorio" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
+                                  <div class="flex flex-row items-center gap-2">
+                                    <input type="text" id="txtSegundoNombre" oninput="actualizarDatosSolicitante()" placeholder="No obligatorio" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
+                                    <div class="relative group focus-within:outline-none" tabindex="0">
+                                        <div class="border-2 border-orange-700 font-bold bg-orange-500 rounded-full text-white text-lg h-7 w-7 flex transition-duration-300 items-center justify-center">
+                                          ?
+                                        </div>
+                                        <div class="absolute z-50 -left-30 -translate-x-1/2 top-full mt-2  w-64 text-justify rounded-md bg-white text-slate-800 text-md p-3 shadow-md shadow-orange-200 opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto">
+                                            El segundo nombre consiste en solo texto.
+                                        </div>
+                                    </div>  
+                                  </div> 
                                 </div>
 
                             </div>
@@ -339,19 +338,38 @@
 
                            <div>
                                 <label class="block text-xs font-bold text-[#002855] uppercase mb-1">
-                                    Primer Apellido *
+                                    Primer Apellido <span class="place-self-start text-xs">*</span>:
                                 </label>
+                                   <div class="flex flex-row items-center gap-2">
+                                    <input type="text" id="txtPrimerApellido" oninput="actualizarDatosSolicitante()" placeholder="Obligatorio" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
+                                    <div class="relative group focus-within:outline-none" tabindex="0">
+                                        <div class="border-2 border-orange-700 font-bold bg-orange-500 rounded-full text-white text-lg h-7 w-7 flex transition-duration-300 items-center justify-center">
+                                             ?
+                                        </div>
+                                        <div class="absolute z-50 -left-30 -translate-x-1/2 top-full mt-2  w-64 text-justify rounded-md bg-white text-slate-800 text-md p-3 shadow-md shadow-orange-200 opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto">
+                                            El primer apellido consiste en solo texto.
+                                        </div>
+                                    </div>
+                                   </div>
 
-                                 <input type="text" id="txtPrimerApellido" oninput="actualizarDatosSolicitante()" placeholder="Obligatorio" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
-                           </div>
+                            </div>
 
                           <div>
                                 <label class="block text-xs font-bold text-[#002855] uppercase mb-1">
-                                    Segundo Apellido
+                                    Segundo Apellido:
                                 </label>
-
-                                <input type="text" id="txtSegundoApellido" oninput="actualizarDatosSolicitante()" placeholder="No obligatorio" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
-                           </div>
+                                 <div class="flex flex-row items-center gap-2">
+                                    <input type="text" id="txtSegundoApellido" oninput="actualizarDatosSolicitante()" placeholder="No obligatorio" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
+                                    <div class="relative group focus-within:outline-none" tabindex="0">
+                                        <div class="border-2 border-orange-700 font-bold bg-orange-500 rounded-full text-white text-lg h-7 w-7 flex transition-duration-300 items-center justify-center">
+                                             ?
+                                        </div>
+                                        <div class="absolute z-50 -left-30 -translate-x-1/2 top-full mt-2  w-64 text-justify rounded-md bg-white text-slate-800 text-md p-3 shadow-md shadow-orange-200 opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto">
+                                            El segundo apellido consiste en solo texto.
+                                        </div>
+                                    </div>
+                                </div>   
+                            </div>
 
                            </div>
 
@@ -361,35 +379,71 @@
                         <div id="campoRazonSocial" class="hidden">
 
                             <label class="block text-xs font-bold text-[#002855] uppercase mb-1">
-                                Razón Social / Entidad *
+                                Razón Social / Entidad <span class="place-self-start text-xs">*</span>:
                             </label>
-
-                            <input type="text" id="txtRazonSocial" oninput="actualizarDatosSolicitante()" placeholder="Escriba el nombre de la empresa o entidad" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
-
+                               <div class="flex flex-row items-center gap-2"> 
+                                <input type="text" id="txtRazonSocial" oninput="actualizarDatosSolicitante()" placeholder="Escriba el nombre de la empresa o entidad" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
+                                <div class="relative group focus-within:outline-none" tabindex="0">
+                                        <div class="border-2 border-orange-700 font-bold bg-orange-500 rounded-full text-white text-lg h-7 w-7 flex transition-duration-300 items-center justify-center">
+                                            ?
+                                        </div>
+                                    <div class="absolute z-50 -left-30 -translate-x-1/2 top-full mt-2  w-64 text-justify rounded-md bg-white text-slate-800 text-md p-3 shadow-md shadow-orange-200 opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto">
+                                            Escribe cual es la razón social de tu empresa Ej: Hermanos Collazos S.A.S.
+                                    </div>
+                                </div>
+                               </div> 
                         </div>
 
                         <!-- Documento -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
-                            <div>
+                            <div id="bloqueTipoIdentificacion">
                                 <label class="block text-xs font-bold text-[#002855] uppercase mb-1">
-                                    Tipo de Identificación *
+                                    Tipo de Identificación <span class="place-self-start text-xs">*</span>:
                                 </label>
-
-                                <select id="txtTipoDoc" onchange="evaluarsubDocumentoOtro(this.value)" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
-                                    <option value="" disabled selected>
-                                        - Seleccione -
-                                    </option>
-                                </select>
+                                   <div class="flex flex-row items-center gap-2">
+                                    <select id="txtTipoDoc" onchange="evaluarsubDocumentoOtro(this.value)" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
+                                        <option value="" disabled selected>
+                                            - Seleccione -
+                                        </option>
+                                    </select>
+                                    <div class="relative group focus-within:outline-none" tabindex="0">
+                                        <div class="border-2 border-orange-700 font-bold bg-orange-500 rounded-full text-white text-lg h-7 w-7 flex transition-duration-300 items-center justify-center">
+                                            ?
+                                        </div>
+                                        <div class="absolute z-50 -left-30 -translate-x-1/2 top-full mt-2  w-64 text-justify rounded-md bg-white text-slate-800 text-md p-3 shadow-md shadow-orange-200 opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto">
+                                            Selecciona un tipo de documento.
+                                        </div>
+                                    </div>
+                                  </div> 
                             </div>
 
-                        <div>
+                            <div  id="bloqueNumeroIdentificacion">
                                 <label class="block text-xs font-bold text-[#002855] uppercase mb-1">
-                                    Número de Documento *
+                                    Número de Documento <span class="place-self-start text-xs">*</span>:
                                 </label>
+                                <div class="flex flex-row items-center gap-2"> 
+                                    <input type="text" id="txtDoc" oninput="actualizarDatosSolicitante()" placeholder="Obligatorio" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
+                                    <div id="avisoTipoDocNatural" class="relative group focus-within:outline-none" tabindex="0">
+                                        <div class="border-2 border-orange-700 font-bold bg-orange-500 rounded-full text-white text-lg h-7 w-7 flex transition-duration-300 items-center justify-center">
+                                            ?
+                                        </div>
+                                        <div class="absolute z-50 -left-30 -translate-x-1/2 top-full mt-2  w-64 text-justify rounded-md bg-white text-slate-800 text-md p-3 shadow-md shadow-orange-200 opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto">
+                                            El número de identificación conciste en un rango entre 5 y 11 digitos (sin puntos, comas, guiones).
+                                        </div>
+                                    </div>
+                                    <div id="avisoTipoDocJuridico" class="relative group focus-within:outline-none" tabindex="0">
+                                        <div class="border-2 border-orange-700 font-bold bg-orange-500 rounded-full text-white text-lg h-7 w-7 flex transition-duration-300 items-center justify-center">
+                                            ?
+                                        </div>
+                                        <div class="absolute z-50 -left-30 -translate-x-1/2 top-full mt-2  w-64 text-justify rounded-md bg-white text-slate-800 text-md p-3 shadow-md shadow-orange-200 opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto">
+                                            Escribe el número NIT de tu empresa Ej: 79940073-2.
+                                        </div>
+                                    </div>
 
-                            <input type="text" id="txtDoc" oninput="actualizarDatosSolicitante()" placeholder="Obligatorio" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
-                        </div>
+
+                                </div>
+                            </div>
 
                         </div>
 
@@ -397,11 +451,19 @@
                         <div id="bloqueDocumentoOtro" class="hidden">
 
                                 <label class="block text-xs font-bold text-[#002855] uppercase mb-1">
-                                    ¿Cuál tipo de documento? *
+                                    ¿Cuál tipo de documento? <span class="place-self-start text-xs">*</span>:
                                 </label>
-
-                                <input type="text" id="txtCualDocumento" oninput="actualizarDatosSolicitante()" placeholder="Especifique el tipo de documento" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
-
+                                <div class="flex flex-row items-center gap-2"> 
+                                    <input type="text" id="txtCualDocumento" oninput="actualizarDatosSolicitante()" placeholder="Especifique el tipo de documento" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
+                                    <div class="relative group focus-within:outline-none" tabindex="0">
+                                        <div class="border-2 border-orange-700 font-bold bg-orange-500 rounded-full text-white text-lg h-7 w-7 flex transition-duration-300 items-center justify-center">
+                                            ?
+                                        </div>
+                                        <div class="absolute z-50 -left-30 -translate-x-1/2 top-full mt-2  w-64 text-justify rounded-md bg-white text-slate-800 text-md p-3 shadow-md shadow-orange-200 opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto">
+                                            Cual es tu otro tipo de Identificación.
+                                        </div>
+                                    </div>
+                                </div>    
                         </div>
 
                         <!-- Correo y Dirección -->
@@ -409,18 +471,36 @@
 
                           <div>
                               <label class="block text-xs font-bold text-[#002855] uppercase mb-1">
-                                  Correo Electrónico *
+                                  Correo Electrónico <span class="place-self-start text-xs">*</span>:
                               </label>
-
-                              <input type="email" id="txtCorreo" oninput="actualizarDatosSolicitante()" placeholder="ejemplo@correo.com" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
+                              <div class="flex flex-row items-center gap-2">  
+                                <input type="email" id="txtCorreo" oninput="actualizarDatosSolicitante()" placeholder="usuario@correo.com" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
+                                <div class="relative group focus-within:outline-none" tabindex="0">
+                                        <div class="border-2 border-orange-700 font-bold bg-orange-500 rounded-full text-white text-lg h-7 w-7 flex transition-duration-300 items-center justify-center">
+                                            ?
+                                        </div>
+                                        <div class="absolute z-50 -left-30 -translate-x-1/2 top-full mt-2  w-64 text-justify rounded-md bg-white text-slate-800 text-md p-3 shadow-md shadow-orange-200 opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto">
+                                            El formato del correo debe incluir un nombre de usuario, el símbolo @ y un dominio por ejemplo: usuario@correo.com.
+                                        </div>
+                                </div>
+                             </div>   
                          </div>
 
                         <div>
                                 <label class="block text-xs font-bold text-[#002855] uppercase mb-1">
-                                    Dirección de Residencia *
+                                    Dirección de Residencia <span class="place-self-start text-xs">*</span>:
                                 </label>
-
-                                <input type="text" id="txtDireccion" oninput="actualizarDatosSolicitante()" placeholder="Ej: Calle 5 # 10-20" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]" >
+                                <div class="flex flex-row items-center gap-2">  
+                                    <input type="text" id="txtDireccion" oninput="actualizarDatosSolicitante()" placeholder="Ej: Calle 3C # 65 - 60, Cali" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]" >
+                                    <div class="relative group focus-within:outline-none" tabindex="0">
+                                        <div class="border-2 border-orange-700 font-bold bg-orange-500 rounded-full text-white text-lg h-7 w-7 flex transition-duration-300 items-center justify-center">
+                                            ?
+                                        </div>
+                                        <div class="absolute z-50 -left-30 -translate-x-1/2 top-full mt-2  w-64 text-justify rounded-md bg-white text-slate-800 text-md p-3 shadow-md shadow-orange-200 opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto">
+                                            La dirección de residencia consiste en cualquier combinación alfanumerica de 7 digitos Ej: Calle 3C # 65 - 60, Cali.
+                                        </div>
+                                    </div>
+                                </div>    
                         </div>
 
                       </div>
@@ -430,18 +510,36 @@
 
                             <div>
                                 <label class="block text-xs font-bold text-[#002855] uppercase mb-1">
-                                    Número de Teléfono Móvil
+                                    Número de Teléfono Móvil:
                                 </label>
-
-                                <input type="tel" id="txtCelular" oninput="actualizarDatosSolicitante()" placeholder="Ej: 315XXXXXXX" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
+                                <div class="flex flex-row items-center gap-2">
+                                    <input type="tel" id="txtCelular" oninput="actualizarDatosSolicitante()" placeholder="No obligatorio" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
+                                    <div class="relative group focus-within:outline-none" tabindex="0">
+                                        <div class="border-2 border-orange-700 font-bold bg-orange-500 rounded-full text-white text-lg h-7 w-7 flex transition-duration-300 items-center justify-center">
+                                            ?
+                                        </div>
+                                        <div class="absolute z-50 -left-30 -translate-x-1/2 top-full mt-2  w-64 text-justify rounded-md bg-white text-slate-800 text-md p-3 shadow-md shadow-orange-200 opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto">
+                                            Escribe tu teléfono móvil, recuerda que debe tener el formato de 10 digitos Ej: 3026549876.
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div>
                                 <label class="block text-xs font-bold text-[#002855] uppercase mb-1">
-                                    Teléfono Fijo
+                                    Teléfono Fijo:
                                 </label>
-
-                                <input type="tel" id="txtFijo" oninput="actualizarDatosSolicitante()" placeholder="Ej: 602XXXXXXX" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
+                                   <div class="flex flex-row items-center gap-2"> 
+                                    <input type="tel" id="txtFijo" oninput="actualizarDatosSolicitante()" placeholder="No obligatorio" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
+                                    <div class="relative group focus-within:outline-none" tabindex="0">
+                                        <div class="border-2 border-orange-700 font-bold bg-orange-500 rounded-full text-white text-lg h-7 w-7 flex transition-duration-300 items-center justify-center">
+                                            ?
+                                        </div>
+                                        <div class="absolute z-50 -left-30 -translate-x-1/2 top-full mt-2  w-64 text-justify rounded-md bg-white text-slate-800 text-md p-3 shadow-md shadow-orange-200 opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto">
+                                            Escribe tu teléfono fijo, recuerda que debe tener el formato de 8 digitos Ej: 23216543.
+                                        </div>
+                                    </div>
+                                  </div>  
                             </div>
 
                         </div>
@@ -455,24 +553,54 @@
 
                        <div id="bloqueubicacionGeografica" class="hidden space-y-5 border-t border-slate-100 pt-3">
                             <div>
-                               <label class="block text-xs font-bold text-[#002855] uppercase mb-1">País *</label>
-                               <select id="cmbPais" class="w-full bg-slate-100 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 font-medium outline-none cursor-not-allowed">
-                                 <option value="Colombia" selected>Colombia</option>
-                               </select>
+                               <label class="block text-xs font-bold text-[#002855] uppercase mb-1">País <span class="place-self-start text-xs">*</span>:</label>
+                                 <div class="flex flex-row items-center gap-2"> 
+                                    <select id="cmbPais" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-700 font-medium outline-none cursor-pointer focus:border-[#DB8700]">
+                                        <option value="Colombia" selected>Colombia</option>
+                                    </select>
+                                    <div class="relative group focus-within:outline-none" tabindex="0">
+                                        <div class="border-2 border-orange-700 font-bold bg-orange-500 rounded-full text-white text-lg h-7 w-7 flex transition-duration-300 items-center justify-center">
+                                            ?
+                                        </div>
+                                        <div class="absolute z-50 -left-[30%]  -translate-x-1/2 top-full mt-2 text-justify 2xl:w-64 xl:w-64 md:w-auto sm:w-auto rounded-md bg-white text-slate-800 text-md p-3 shadow-md shadow-orange-200 opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto">                                  
+                                            Selecciona el país de tu residencia.
+                                        </div>
+                                    </div>
+                                 </div>  
                             </div>
 
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                <div>
                                   <label class="block text-xs font-bold text-[#002855] uppercase mb-1">Departamento *</label>
-                                  <select id="cmbDepartamento" onchange="cargarMunicipios(this.value); actualizarEstadoBotonPaso1(); " class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
-                                     <option value="" disabled selected>- Seleccione -</option>
-                                  </select>
+                                    <div class="flex flex-row items-center gap-2">
+                                        <select id="cmbDepartamento" onchange="cargarMunicipios(this.value); actualizarEstadoBotonPaso1(); " class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
+                                            <option value="" disabled selected>- Seleccione -</option>
+                                        </select>
+                                        <div class="relative group focus-within:outline-none" tabindex="0">
+                                            <div class="border-2 border-orange-700 font-bold bg-orange-500 rounded-full text-white text-lg h-7 w-7 flex transition-duration-300 items-center justify-center">
+                                                ?
+                                            </div>
+                                            <div class="absolute z-50 -left-[30%] -translate-x-1/2 top-full mt-2 text-justify 2xl:w-64 xl:w-64 md:w-auto sm:w-auto rounded-md bg-white text-slate-800 text-md p-3 shadow-md shadow-orange-200 opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto">
+                                                Selecciona el departamento de tu residencia.
+                                            </div>
+                                        </div>
+                                    </div>    
                                </div>
                                <div>
                                   <label class="block text-xs font-bold text-[#002855] uppercase mb-1">Ciudad / Municipio *</label>
-                                  <select  id="cmbCiudad" onchange="actualizarEstadoBotonPaso1();" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
-                                     <option value=""  disabled selected>-Seleccione-</option>
-                                  </select>
+                                        <div class="flex flex-row items-center gap-2">  
+                                            <select  id="cmbCiudad" onchange="actualizarEstadoBotonPaso1();" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
+                                                <option value=""  disabled selected>-Seleccione-</option>
+                                            </select>
+                                            <div class="relative group focus-within:outline-none" tabindex="0">
+                                                <div class="border-2 border-orange-700 font-bold bg-orange-500 rounded-full text-white text-lg h-7 w-7 flex transition-duration-300 items-center justify-center">
+                                                    ?
+                                                </div>
+                                                <div class="absolute z-50 -left-[30%] -translate-x-1/2 top-full mt-2 text-justify 2xl:w-64 xl:w-64 md:w-auto sm:w-auto rounded-md bg-white text-slate-800 text-md p-3 shadow-md shadow-orange-200 opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto">
+                                                    Selecciona el municipio de tu residencia.
+                                                </div>
+                                            </div>
+                                        </div>    
                                </div>
                             </div>
                        </div>
@@ -493,64 +621,36 @@
 
                    <!-- PASO 2 -->
                    <div id="capa-paso2" class="hidden space-y-5">
-                        <div class="border-l-4 border-[#002855] pl-3 mb-4">
-                          <h3 class="text-base font-black text-[#002855] uppercase tracking-tight">Tipo de Solicitud</h3>
-                        </div>
+                       
+                    <div class="text-justify border border-orange-400 rounded-lg p-2">
+                            2.Tipo de Solicitud la cual será el tramite, por defecto cada función de cada dependencia viene con solo un tipo de solicitud por defecto.  
+                    </div>
+                    <div class="flex items-center justify-between gap-2 border-l-4 border-[#002855] pl-3 mb-4">
+                     <h3 class="text-base font-black text-[#002855] uppercase tracking-tight">Tipo de Solicitud y Tipología</h3>
+                      <div class="relative group focus-within:outline-none" tabindex="0">
+                            <div class="border-2 border-orange-700 font-bold bg-orange-500 rounded-full text-white text-lg h-7 w-7 flex transition-duration-300 items-center justify-center">
+                              ?
+                            </div>
+                            <div class="absolute z-50 -left-30 -translate-x-1/2 top-full mt-2  w-64 text-justify rounded-md bg-white text-slate-800 text-md p-3 shadow-md shadow-orange-200 opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto">
+                              El tipo de solicitud puede estar por defecto a razón de la función seleccionada <br>
+                            </div>
+                      </div>
+                    <!-- Tu botón de ayuda / tooltip -->
+                    </div>
 
-                        <p class="text-sm text-slate-600">Seleccione la tipología de su requerimiento institucional:</p>
+                    <p class="text-sm text-slate-600">Tipo de solicitud preseleccionada ajustada al requerimiento institucional:</p>
 
-                        <div class="space-y-2.5">
-                          <label class="block p-3.5 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer hover:border-[#DB8700] transition-colors">
-                              <div class="flex items-start gap-3">
-                                  <input type="radio" name="tipoSolicitud"  onchange="seleccionarTipoSolicitud(this)" value="peticion"  class="mt-1 text-[#002855]">
-                                  <div><span class="text-sm font-bold text-[#002855] block">Petición</span><span class="text-xs text-slate-500">Solicitud respetuosa presentada para obtener información, un servicio o actuación.</span></div>
-                              </div>
-                          </label>
-                          <label class="block p-3.5 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer hover:border-[#DB8700] transition-colors">
-                              <div class="flex items-start gap-3">
-                                  <input type="radio" name="tipoSolicitud"  onchange="seleccionarTipoSolicitud(this)" value="queja" class="mt-1 text-[#002855]">
-                                  <div><span class="text-sm font-bold text-[#002855] block">Queja</span><span class="text-xs text-slate-500">Manifestación de inconformidad relacionada con la conducta de un servidor público.</span></div>
-                              </div>
-                          </label>
-                          <label class="block p-3.5 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer hover:border-[#DB8700] transition-colors">
-                              <div class="flex items-start gap-3">
-                                  <input type="radio" name="tipoSolicitud"  onchange="seleccionarTipoSolicitud(this)" value="reclamo" class="mt-1 text-[#002855]">
-                                  <div><span class="text-sm font-bold text-[#002855] block">Reclamo</span><span class="text-xs text-slate-500">Inconformidad por la prestación de un servicio o incumplimiento de obligaciones.</span></div>
-                              </div>
-                          </label>
-                          <label class="block p-3.5 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer hover:border-[#DB8700] transition-colors">
-                              <div class="flex items-start gap-3">
-                                  <input type="radio" name="tipoSolicitud"  onchange="seleccionarTipoSolicitud(this)" value="sugerencia" class="mt-1 text-[#002855]">
-                                  <div><span class="text-sm font-bold text-[#002855] block">Sugerencia</span><span class="text-xs text-slate-500">Propuesta formulada para mejorar la prestación de los servicios de la entidad.</span></div>
-                              </div>
-                          </label>
-                          
-                          <label class="block p-3.5 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer hover:border-[#DB8700] transition-colors">
-                              <div class="flex items-start gap-3">
-                                  <input type="radio" name="tipoSolicitud"  onchange="seleccionarTipoSolicitud(this)" value="informativa" class="mt-1 text-[#002855]">
-                                  <div><span class="text-sm font-bold text-[#002855] block">Comunicación informativa</span><span class="text-xs text-slate-500">Información que no requiere respuesta obligatoria.</span></div>
-                              </div>
-                          </label>
+                    <!-- contenedor tipos de solicitud dependiendo de la funcion de dependencia -->
+                    
+                    <div id="contenedorTiposSolicitud" class="space-y-4 max-h-[50vh]  overflow-y-auto pr-1 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-amber-300 [&::-webkit-scrollbar-thumb]:bg-amber-300"></div>
 
-                          <label class="block p-3.5 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer hover:border-[#DB8700] transition-colors">
-                              <div class="flex items-start gap-3">
-                                  <input type="radio" name="tipoSolicitud"  onchange="seleccionarTipoSolicitud(this)" value="Requerimiento" class="mt-1 text-[#002855]">
-                                  <div><span class="text-sm font-bold text-[#002855] block">Requerimiento</span><span class="text-xs text-slate-500">Requerimientos Entes de control.</span></div>
-                              </div>
-                          </label>
+                    <!--End contenedor tipos de solicitud dependiendo de la funcion de dependencia -->
 
-                          <label class="block p-3.5 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer hover:border-[#DB8700] transition-colors">
-                              <div class="flex items-start gap-3">
-                                  <input type="radio" name="tipoSolicitud"  onchange="seleccionarTipoSolicitud(this)" value="Otros" class="mt-1 text-[#002855]">
-                                  <div><span class="text-sm font-bold text-[#002855] block">Otros</span><span class="text-xs text-slate-500"></span></div>
-                              </div>
-                          </label>
-                       </div>
+                    <div class="grid grid-cols-2 gap-4 pt-4 border-t border-slate-100">
+                        <button type="button" onclick="irAlPaso(1)" class="w-full bg-slate-100 hover:bg-slate-200 text-[#002855] font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider cursor-pointer">Atrás</button>
+                        <button id="btnContinuarPaso2" type="button" onclick="irAlPaso(3)" class="w-full bg-gray-400 text-white font-black py-3 px-4 rounded-xl text-xs uppercase tracking-widest cursor-not-allowed opacity-60">CONTINUAR</button>
+                    </div>
 
-                       <div class="grid grid-cols-2 gap-4 pt-4 border-t border-slate-100">
-                          <button type="button" onclick="irAlPaso(1)" class="w-full bg-slate-100 hover:bg-slate-200 text-[#002855] font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider cursor-pointer">Atrás</button>
-                          <button id="btnContinuarPaso2" type="button" onclick="irAlPaso(3)" class="w-full bg-gray-400 text-white font-black py-3 px-4 rounded-xl text-xs uppercase tracking-widest cursor-not-allowed opacity-60">CONTINUAR</button>
-                       </div>
                    </div>
 
                       <!-- END PASO 2 -->
@@ -558,6 +658,10 @@
                            <!-- PASO 3 -->
 
                     <div id="capa-paso3" class="hidden space-y-5">
+
+                        <div class="text-justify border border-orange-400 rounded-lg p-2">
+                            3.Detalles de la solicitud asunto contenido de la solicitud archivos adjuntos medio respuesta, el asunto que por defecto es la función previamente seleccionada unicamente editable cuando este disponible y seleccionada la opción Otro.  
+                        </div>
                         
                         <div class="border-l-4 border-[#002855] pl-3 mb-4">
                         
@@ -566,41 +670,86 @@
                         </div>
 
                         <div>
-                           <label class="block text-xs font-bold text-[#002855] uppercase mb-1">Asunto *</label>
-                           <input type="text" oninput="actualizarAsunto()" id="txtAsunto" readonly placeholder="Breve resumen de la solicitud" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
+                           <label class="block text-xs font-bold text-[#002855] uppercase mb-1">Asunto <span class="place-self-start text-xs">*</span>:</label>
+                            <div class="flex flex-row items-center gap-2">
+                              <input type="text" oninput="actualizarAsunto()" id="txtAsunto" readonly placeholder="Breve resumen de la solicitud" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700]">
+                              <div class="relative group focus-within:outline-none" tabindex="0">
+                                        <div class="border-2 border-orange-700 font-bold bg-orange-500 rounded-full text-white text-lg h-7 w-7 flex transition-duration-300 items-center justify-center">
+                                            ?
+                                        </div>
+                                        <div class="absolute z-50 -left-30 -translate-x-1/2 top-full mt-2  w-64 text-justify rounded-md bg-white text-slate-800 text-md p-3 shadow-md shadow-orange-200 opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto">
+                                            El asunto esta definido por la función seleccionada previamente de la dependencia. 
+                                        </div>
+                              </div>
+                            </div> 
                         </div> 
 
                     
 
                         <div>
-                           <label class="block text-xs font-bold text-[#002855] uppercase mb-1">Contenido de la solicitud *</label>
-                           <textarea id="txtContenido" oninput="guardarContenido()" rows="5" placeholder="Redacte detalladamente los hechos..." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700] resize-none"></textarea>
+                           <label class="block text-xs font-bold text-[#002855] uppercase mb-1">Contenido de la solicitud <span class="place-self-start text-xs">*</span>:</label></label>
+                            <div class="flex flex-row items-center gap-2">
+                                <textarea id="txtContenido" oninput="guardarContenido()" rows="5" placeholder="Redacte detalladamente los hechos...obligatorio" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#DB8700] resize-none"></textarea>
+                                <div class="relative group focus-within:outline-none" tabindex="0">
+                                        <div class="border-2 border-orange-700 font-bold bg-orange-500 rounded-full text-white text-lg h-7 w-7 flex transition-duration-300 items-center justify-center">
+                                            ?
+                                        </div>
+                                        <div class="absolute z-50 -left-30 -translate-x-1/2 top-full mt-2  w-64 text-justify rounded-md bg-white text-slate-800 text-md p-3 shadow-md shadow-orange-200 opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto">
+                                           Cuéntanos de que se trata tu solicitud, recuerda  que puedes escribir minimo 20 hasta 5000 letras para esta descripción.  
+                                        </div>
+                                </div>
+                            </div>
                         </div>
 
-                        <div>
+                        <div >
                            <label class="block text-xs font-bold text-[#002855] uppercase mb-1">Dependencia seleccionada</label>
-                           <input type="text"  id="txtDependenciaSeleccionada" readonly  class="w-full bg-slate-100 border border-slate-200 rounded-xl px-4 py-3 text-sm text-[#002855] font-bold outline-none">
+                            <div class="flex flex-row items-center gap-2">
+                                <input type="text"  id="txtDependenciaSeleccionada" readonly  class="w-full bg-slate-100 border border-slate-200 rounded-xl px-4 py-3 text-sm text-[#002855] font-bold outline-none">
+                               <div class="relative group focus-within:outline-none" tabindex="0">
+                                        <div class="border-2 border-orange-700 font-bold bg-orange-500 rounded-full text-white text-lg h-7 w-7 flex transition-duration-300 items-center justify-center">
+                                            ?
+                                        </div>
+                                        <div class="absolute z-50 -left-30 -translate-x-1/2 top-full mt-2  w-64 text-justify rounded-md bg-white text-slate-800 text-md p-3 shadow-md shadow-orange-200 opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto">
+                                            La dependencia esta definida en tu elección inicial del formulario.
+                                        </div>
+                                </div>
+                            </div>        
                         </div>
 
-                        <div class="space-y-4 bg-slate-50 p-5 rounded-2xl border border-slate-200">
-                              <span class="block text-xs font-black text-[#002855] uppercase tracking-wider">Documentación Adjunta (Opcional)</span>
+                        <div class="flex flex-row items-center gap-2"> 
+                         <div class="w-full space-y-4 bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                            
+                           <span class="block text-xs font-black text-[#002855] uppercase tracking-wider">Documentación Adjunta (Opcional)</span>
+                           
+                            <div class="w-full">
+                              <div class="space-y-1">
+                               <label class="block text-[11px] font-bold text-slate-600 uppercase">Anexo 1</label>
+                               <input type="file" id="anexo1" onchange="seleccionarAnexo(this)" name="anexo1" class="block w-full text-xs text-slate-500 border border-slate-300 bg-white rounded-xl p-2 focus:outline-none focus:border-[#DB8700] file:mr-4 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-slate-100 file:text-[#002855] hover:file:bg-slate-200">
+                               </div>
+
+                               <div class="space-y-1 border-t border-slate-200 pt-3">
+                                <label class="block text-[11px] font-bold text-slate-600 uppercase">Anexo 2</label>
+                                <input type="file" id="anexo2" onchange="seleccionarAnexo(this)" name="anexo2" class="block w-full text-xs text-slate-500 border border-slate-300 bg-white rounded-xl p-2 focus:outline-none focus:border-[#DB8700] file:mr-4 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-slate-100 file:text-[#002855] hover:file:bg-slate-200">
+                               </div>
+
+                               <div class="space-y-1 border-t border-slate-200 pt-3">
+                                <label class="block text-[11px] font-bold text-slate-600 uppercase">Anexo 3</label>
+                                <input type="file" id="anexo3" onchange="seleccionarAnexo(this)" name="anexo3" class="block w-full text-xs text-slate-500 border border-slate-300 bg-white rounded-xl p-2 focus:outline-none focus:border-[#DB8700] file:mr-4 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-slate-100 file:text-[#002855] hover:file:bg-slate-200">
+                               </div>
+                            </div>
+                            
+                         </div>
+                        <div class="relative group focus-within:outline-none" tabindex="0">
+                                        <div class="border-2 border-orange-700 font-bold bg-orange-500 rounded-full text-white text-lg h-7 w-7 flex transition-duration-300 items-center justify-center">
+                                            ?
+                                        </div>
+                                        <div class="absolute z-50 -left-30 -translate-x-1/2 top-full mt-2  w-64 text-justify rounded-md bg-white text-slate-800 text-md p-3 shadow-md shadow-orange-200 opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto">
+                                            Puedes anexar un archivo de soporte, formatos permitidos: PDF,JPG y PNG. Tamaño máximo por archivo: 30MB.
+                                        </div>
+                        </div>
+                        </div>
+                            
                         
-                            <div class="space-y-1">
-                              <label class="block text-[11px] font-bold text-slate-600 uppercase">Anexo 1</label>
-                              <input type="file" id="anexo1" onchange="seleccionarAnexo(this)" name="anexo1" class="block w-full text-xs text-slate-500 border border-slate-300 bg-white rounded-xl p-2 focus:outline-none focus:border-[#DB8700] file:mr-4 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-slate-100 file:text-[#002855] hover:file:bg-slate-200">
-                            </div>
-
-                            <div class="space-y-1 border-t border-slate-200 pt-3">
-                               <label class="block text-[11px] font-bold text-slate-600 uppercase">Anexo 2</label>
-                               <input type="file" id="anexo2" onchange="seleccionarAnexo(this)" name="anexo2" class="block w-full text-xs text-slate-500 border border-slate-300 bg-white rounded-xl p-2 focus:outline-none focus:border-[#DB8700] file:mr-4 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-slate-100 file:text-[#002855] hover:file:bg-slate-200">
-                            </div>
-
-                            <div class="space-y-1 border-t border-slate-200 pt-3">
-                               <label class="block text-[11px] font-bold text-slate-600 uppercase">Anexo 3</label>
-                               <input type="file" id="anexo3" onchange="seleccionarAnexo(this)" name="anexo3" class="block w-full text-xs text-slate-500 border border-slate-300 bg-white rounded-xl p-2 focus:outline-none focus:border-[#DB8700] file:mr-4 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-slate-100 file:text-[#002855] hover:file:bg-slate-200">
-                            </div>
-                            <p class="text-[10px] text-slate-500 font-medium leading-tight mt-1">(Formatos permitidos: PDF, DOCX, XLSX, JPG, PNG. Tamaño máximo por archivo: 30MB)</p>
-                        </div>
 
                         <div id="bloqueMedioRespuesta">
                               <label class="block text-xs font-bold text-[#002855] uppercase mb-2">Medio de respuesta preferido *</label>
@@ -615,10 +764,14 @@
                         </div>
 
                         <div class="pt-2">
-                           <label class="flex items-start gap-3 text-xs text-slate-600 cursor-pointer">
-                             <input type="checkbox" id="chkPolitica" onchange="validarEnvioFinal()" class="mt-0.5 w-4 h-4 text-[#002855] rounded-sm">
-                             <span class="leading-tight">Acepto de manera expresa los términos y la Política de Tratamiento de Datos Personales (Ley 1581 de 2012). *</span>
-                           </label>
+                           <div class="grid grid-cols-1"> 
+                             <label class="flex items-start gap-3 text-xs text-slate-600 cursor-pointer mb-2">
+                              <input type="checkbox" id="chkPolitica" onchange="validarEnvioFinal()" class="mt-0.5 w-4 h-4 text-[#002855] rounded-sm">
+                              <span id="textoPolitica" class="leading-tight font-bold">Conozco y Acepto la Política de Privacidad de Datos *</span>
+                             </label>
+                             <a href="https://sig.cali.gov.co/app.php/staff/document/viewPublic/index/1195" target="_blank" rel="noopener noreferrer" class="text-sm text-blue-800">Ver nuestra política de privacidad</a>
+                             <h3 class="text-sm text-slate-600">Información sobre posibles costos asiciados a la respuesta</h3>
+                            </div>  
                         </div>
 
                         <div class="grid grid-cols-2 gap-4 pt-4 border-t border-slate-100">
@@ -640,6 +793,8 @@
     </footer>
 
     
+    <script src="js/vendor/jspdf.umd.min.js"></script>
+    <script src="js/vendor/JsBarcode.all.min.js"></script>
     <script type="module" src="js/script-movilidadRadicacion.js"></script>
     
     </body>
