@@ -90,7 +90,7 @@ function cargarDependencia() {
 
         alert('Dependencia no encontrada');
 
-        window.location.href = 'opts.html';
+        window.location.href = 'index.html';
 
         return;
     }
@@ -2566,7 +2566,7 @@ function finalizarTodo() {
     limpiarRadicacion();
 
     document.getElementById('modfinal').classList.add('hidden');
-    window.location.href = 'opts.html?nd=true';
+    window.location.href = 'index.html?nd=true';
     
 }
 window.finalizarTodo = finalizarTodo;

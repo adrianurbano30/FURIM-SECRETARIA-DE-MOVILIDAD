@@ -1,6 +1,5 @@
 @import "tailwindcss" source(none);
 
-@source "../Index.html";
-@source "../opts.html";
+@source "../index.html";
 @source "../dependencia.html";
 @source "../js/**/*.js";
