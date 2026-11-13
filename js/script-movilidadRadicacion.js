@@ -18,6 +18,7 @@ document.addEventListener(
 
 
 let dependenciaActual = null;
+let flujoEntesControlDespacho = false;
 let funcionSeleccionada = "";
 
 
@@ -54,7 +55,7 @@ const radicacion = {
     cualDocumento: '',
 
     tipoSolicitud: '',
-
+    diasRespuesta: null,
     asunto: '',
     contenido: '',
     medioRespuesta: '',
@@ -234,6 +235,16 @@ function mostrarResumenFuncion(contenedor, funcion, radicado = '') {
 
 function inicializarDespachoEntesControl(funcionUrl,subfuncionUrl,numeroComisionUrl,numeroRadicadoSeguimientoUrl) {
 
+    flujoEntesControlDespacho = true;
+    radicacion.anonima = false;
+
+    document.getElementById('bloqueSolicitudAnonima')?.classList.add('hidden');
+
+    const selectorSolicitante = document.getElementById('cmbTipoSolicitante');
+    selectorSolicitante.value = 'juridica';
+    selectorSolicitante.disabled = true;
+    controlarFlujoCampos('juridica');
+    
     radicacion.dependencia = dependenciaActual.nombre;
     radicacion.codigoDependencia = dependenciaActual.codigo;
     radicacion.funcion = funcionUrl;
@@ -1292,6 +1303,19 @@ function validarPaso2() {
         alert('Debe seleccionar un tipo de solicitud.');
         return false;
     }
+    if (flujoEntesControlDespacho) {
+    const campoDias = document.getElementById('txtDiasRespuestaEnte');
+    const valor = campoDias?.value.trim();
+    const dias = Number(valor);
+
+        if (!valor || !Number.isInteger(dias) || dias < 1 || dias > 30) {
+            alert('Ingresa un tiempo de respuesta entre 1 y 30 días hábiles.');
+            campoDias?.focus();
+            return false;
+        }
+
+        radicacion.diasRespuesta = dias;
+    }
 
     return true;
 }
@@ -2025,6 +2049,7 @@ function enviarFormulario() {
         ['Asunto', radicacion.asunto],
        // ['Función',radicacion.funcion === 'Otro'? radicacion.asunto: radicacion.funcion],
         ['Tipo Solicitud', radicacion.tipoSolicitud],
+        ...(flujoEntesControlDespacho ? [['Tiempo de respuesta', `${radicacion.diasRespuesta} días hábiles`]]: []),
         ['Tipo Solicitante',radicacion.anonima ? 'Anónimo' : radicacion.tipoSolicitante],
         ['Nombre', radicacion.primerNombre],
         ['Segundo nombre', radicacion.segundoNombre],
@@ -2566,24 +2591,82 @@ function cargarTiposSolicitudDinamicos() {
                 radicacion.tipoSolicitud = `${categoria.nombre} - ${tipo.nombre}`;
             }
 
-            htmlAcumulado += `
-                <label class="block p-3.5 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer hover:border-[#DB8700] transition-all duration-200">
-                    <div class="flex items-start gap-3">
-                        <input type="radio" 
-                               name="tipoSolicitudEspecifica" 
-                               value="${tipo.nombre}" 
-                               data-categoria="${categoria.nombre}" 
-                               data-info="${tipo.informacion}"
-                               ${esOpcionUnica ? 'checked' : ''} 
-                               onchange="seleccionarTipoSolicitudDinamico(this)" 
-                               class="mt-1 text-[#002855] focus:ring-[#002855]">
-                        <div class="flex-grow">
-                            <span class="text-sm font-bold text-[#002855] block">${tipo.nombre}</span>
-                            <span class="text-xs text-slate-500 block mt-0.5 leading-relaxed">${tipo.informacion}</span>
+            const esEntesDespacho =
+    flujoEntesControlDespacho &&
+    categoria.nombre === 'Peticiones' &&
+    tipo.nombre === 'Entes de Control';
+
+htmlAcumulado += `
+    <div class="block p-3.5 bg-slate-50 border border-slate-200 rounded-xl">
+        <label class="flex items-start gap-3 cursor-pointer hover:border-[#DB8700] transition-all duration-200">
+            <input type="radio"
+                   name="tipoSolicitudEspecifica"
+                   value="${tipo.nombre}"
+                   data-categoria="${categoria.nombre}"
+                   data-info="${tipo.informacion}"
+                   ${esOpcionUnica ? 'checked' : ''}
+                   onchange="seleccionarTipoSolicitudDinamico(this)"
+                   class="mt-1 text-[#002855] focus:ring-[#002855]">
+
+            <span class="text-sm font-bold text-[#002855]">
+                ${tipo.nombre}
+            </span>
+        </label>
+
+        ${
+            esEntesDespacho
+                ? `
+                    <div class="mt-3 ml-7">
+                        <label for="txtDiasRespuestaEnte"
+                               class="block text-xs font-semibold text-slate-600 mb-1">
+                            Tiempo de respuesta:
+                        </label>
+
+                        <div class="flex items-center gap-2 text-xs text-slate-500">
+                            <span>Respuesta en</span>
+
+                            <input id="txtDiasRespuestaEnte"
+                                   type="number"
+                                   min="1"
+                                   max="30"
+                                   step="1"
+                                   inputmode="numeric"
+                                   required
+                                   value="${radicacion.diasRespuesta ?? ''}"
+                                   aria-label="Días hábiles de respuesta"
+                                   class="w-16 rounded-md border border-slate-300 bg-white px-2 py-1 text-center text-sm text-slate-800 focus:outline-none focus:border-[#DB8700]">
+
+                            <span>días hábiles</span>
                         </div>
                     </div>
-                </label>
-            `;
+                `
+                : `
+                    <span class="text-xs text-slate-500 block mt-1 leading-relaxed">
+                        ${tipo.informacion}
+                    </span>
+                `
+                }
+            </div>
+        `;
+
+            // htmlAcumulado += `
+            //     <label class="block p-3.5 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer hover:border-[#DB8700] transition-all duration-200">
+            //         <div class="flex items-start gap-3">
+            //             <input type="radio" 
+            //                    name="tipoSolicitudEspecifica" 
+            //                    value="${tipo.nombre}" 
+            //                    data-categoria="${categoria.nombre}" 
+            //                    data-info="${tipo.informacion}"
+            //                    ${esOpcionUnica ? 'checked' : ''} 
+            //                    onchange="seleccionarTipoSolicitudDinamico(this)" 
+            //                    class="mt-1 text-[#002855] focus:ring-[#002855]">
+            //             <div class="flex-grow">
+            //                 <span class="text-sm font-bold text-[#002855] block">${tipo.nombre}</span>
+            //                 <span class="text-xs text-slate-500 block mt-0.5 leading-relaxed">${tipo.informacion}</span>
+            //             </div>
+            //         </div>
+            //     </label>
+            // `;
         });
 
         htmlAcumulado += `

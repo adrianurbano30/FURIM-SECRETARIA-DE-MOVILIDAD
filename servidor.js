@@ -52,80 +52,7 @@ app.get('/estado', (req, res) => {
 
 ///funcion genear  PDF
 
-// function generarPdfRadicacion(datos,radicado,fecharadicacion){
 
-//     return new Promise((resolve,reject)=>{
-
-//         const doc = new PDFDocument({
-//             size: 'LETTER',
-//             margins:  { top: 50, bottom: 50, left: 55, right: 55 }
-//         });
-
-//         const partes = [];
-
-//         doc.on('data', parte => partes.push(parte));
-//         doc.on('end', () => resolve(Buffer.concat(partes)));
-//         doc.on('error', reject);
-
-//          const anonima = Boolean(datos.anonima);
-
-//           const nombreCompleto = [
-//             datos.primerNombre,
-//             datos.segundoNombre,
-//             datos.primerApellido,
-//             datos.segundoApellido
-//           ].filter(Boolean).join(' ').trim();
-
-//           const remitente = anonima ? 'Solicitante anónimo': (datos.tipoSolicitante === 'juridica'? datos.razonSocial || nombreCompleto || 'Solicitante': nombreCompleto || datos.razonSocial || 'Solicitante');
-
-//           const tiposSolicitante = {
-//             natural: 'Persona natural',
-//             juridica: 'Persona jurídica',
-//             menor: 'Niño, niña o adolescente',
-//             apoderado: 'Apoderado o tercero'
-//         };
-
-//         const tipoSolicitante = anonima
-//             ? 'Anónimo'
-//             : (tiposSolicitante[datos.tipoSolicitante]
-//                 || datos.tipoSolicitante
-//                 || 'No indicado');
-
-//         const fecha = new Intl.DateTimeFormat('es-CO', {
-//             dateStyle: 'long',
-//             timeZone: 'America/Bogota'
-//         }).format(new Date(fecharadicacion));
-
-//         doc.fontSize(18).font('Helvetica-Bold').text('Comprobante de radicación', { align: 'center' });
-
-//         doc.moveDown();
-//         doc.fontSize(12).font('Helvetica-Bold').text(`Número de radicado: ${radicado}`);
-//         doc.font('Helvetica').text(`Fecha: ${fecha}`);
-//         doc.text(`Remitente: ${remitente}`);
-//         doc.text(`Tipo de solicitante: ${tipoSolicitante}`);
-
-//         if (!anonima && datos.documento) {
-//             doc.text(`Documento: ${datos.documento}`);
-//         }
-
-//         if (!anonima && datos.correo) {
-//             doc.text(`Correo: ${datos.correo}`);
-//         }
-
-//         doc.moveDown().font('Helvetica-Bold').text('Asunto:');
-
-//         doc.font('Helvetica').text(datos.asunto || 'Sin asunto registrado');
-
-//         doc.moveDown().font('Helvetica-Bold').text('Solicitud:');
-
-//         doc.font('Helvetica').text(datos.contenido || 'Sin descripción registrada');
-
-//         doc.end();
-
-
-//     });
-
-// }   
 
 function generarPdfRadicacion(datos, radicado, fechaRadicacion) {
     return new Promise((resolve, reject) => {
@@ -281,6 +208,15 @@ function generarPdfRadicacion(datos, radicado, fechaRadicacion) {
         };
 
         agregarParrafo(`Santiago de Cali, ${fecha}`, { gap: 0.8 });
+        const esEntesControlDespacho =
+    datos.dependencia === 'Despacho del Secretario de Movilidad' &&
+    String(datos.funcion || '').startsWith('Requerimiento Entes de Control');
+
+        const diasRespuesta = Number(datos.diasRespuesta);
+
+        if (esEntesControlDespacho && Number.isInteger(diasRespuesta) && diasRespuesta >= 1 && diasRespuesta <= 30) {
+        agregarParrafo(`Tiempo de respuesta: ${diasRespuesta} días hábiles`,{ negrita: true, espacio: 0.5 });
+        }
         agregarParrafo('Señores,', { espacio: 0.3 });
         agregarParrafo('SECRETARÍA DE MOVILIDAD', { negrita: true, espacio: 0.3 });
         agregarParrafo('Alcaldía Distrital de Santiago de Cali', { espacio: 0.8 });
@@ -391,6 +327,23 @@ app.post('/guardar-radicacion', async (req, res) => {
             });
         }
 
+        const esEntesControlDespacho = radicacion.dependencia === 'Despacho del Secretario de Movilidad' && String(radicacion.funcion || '').startsWith('Requerimiento Entes de Control');
+
+        if (esEntesControlDespacho) {
+        const dias = Number(radicacion.diasRespuesta);
+
+        if (!Number.isInteger(dias) || dias < 1 || dias > 30) {
+            return res.status(400).json({
+                ok: false,
+                mensaje: 'El tiempo de respuesta debe estar entre 1 y 30 días hábiles.'
+            });
+        }
+
+        radicacion.diasRespuesta = dias;
+        } else {
+            radicacion.diasRespuesta = '';
+        }
+
         // Crear el libro en memoria.
         const libro = new ExcelJS.Workbook();
 
@@ -434,10 +387,19 @@ app.post('/guardar-radicacion', async (req, res) => {
                 { header: 'Acepta política', key: 'aceptaPolitica', width: 18 },
                 { header: 'Anexo 1', key: 'anexo1', width: 28 },
                 { header: 'Anexo 2', key: 'anexo2', width: 28 },
-                { header: 'Anexo 3', key: 'anexo3', width: 28 }
+                { header: 'Anexo 3', key: 'anexo3', width: 28 },
+                { header: 'Días de respuesta (hábiles)', key: 'diasRespuesta', width: 28 }
             ];
 
             hoja.getRow(1).font = { bold: true };
+        }
+
+        const columnaDiasRespuesta = 30; // AD
+
+        if (!hoja.getCell(1, columnaDiasRespuesta).value) {
+            hoja.getCell(1, columnaDiasRespuesta).value ='Días de respuesta (hábiles)';
+            hoja.getCell(1, columnaDiasRespuesta).font = { bold: true };
+            hoja.getColumn(columnaDiasRespuesta).width = 28;
         }
 
         // Convertir los valores a texto para evitar valores indefinidos.
@@ -488,7 +450,8 @@ app.post('/guardar-radicacion', async (req, res) => {
     radicacion.aceptaPolitica ? 'Sí' : 'No',
     texto(radicacion.anexo1),
     texto(radicacion.anexo2),
-    texto(radicacion.anexo3)
+    texto(radicacion.anexo3),
+    texto(radicacion.diasRespuesta)
 ]);
 
 console.log('Número de fila creada:', nuevaFila.number);
