@@ -19,10 +19,12 @@
   },
   "homepage": "https://github.com/adrianurbano30/Formulario-nico-de-Radicaci-n-de-Movilidad#readme",
   "dependencies": {
-    "exceljs": "^4.4.0",
+    "exceljs": "^3.4.0",
     "express": "^5.3.0",
     "jsbarcode": "^3.12.3",
-    "jspdf": "^4.2.1"
+    "jspdf": "^4.2.1",
+    "nodemailer": "^10.5.0",
+    "pdfkit": "^0.20.2"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",

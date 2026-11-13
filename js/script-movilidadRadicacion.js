@@ -2002,7 +2002,12 @@ function volverARevision() {
 }
 window.volverARevision = volverARevision;
 
+
+
+
 function enviarFormulario() {
+
+    console.table("datos radicacion",radicacion);
 
     const contenedorListaDatos = document.getElementById('contenedorListaDatos');
 
@@ -2123,6 +2128,7 @@ async function confirmarEnvioRadicacion() {
             );
         }
 
+
         setTimeout(() => modalfinal(resultado), 1000);
 
       
@@ -2212,354 +2218,42 @@ function modalfinal(objetofinal){
 }
 window.modalfinal = modalfinal;
 
-// async function descargarPdfRadicacion(respuestaServidor) {
 
-//     const datos = respuestaServidor.objetoPQR || {};
-//     const radicado = String(respuestaServidor.Rad || '').trim();
-
-//     if (!radicado) {
-//         throw new Error('El servidor no devolvió el número de radicado.');
-//     }
-//     if (!window.jspdf?.jsPDF || !window.JsBarcode) {
-//         throw new Error('No se cargaron las librerías locales para crear el PDF.');
-//     }
-
-//     const { jsPDF } = window.jspdf;
-//     const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'letter' });
-//     const anchoPagina = pdf.internal.pageSize.getWidth();
-//     const altoPagina = pdf.internal.pageSize.getHeight();
-//     const margen = 25;
-//     const anchoTexto = anchoPagina - margen * 2;
-//     let y = 73;
-
-//     const anonima = Boolean(datos.anonima);
-//     const nombreCompleto = [
-//         datos.primerNombre,
-//         datos.segundoNombre,
-//         datos.primerApellido,
-//         datos.segundoApellido
-//     ].filter(Boolean).join(' ').trim();
-//     const remitente = anonima
-//         ? 'Solicitante anónimo'
-//         : (datos.tipoSolicitante === 'juridica'
-//             ? (datos.razonSocial || nombreCompleto || 'Solicitante')
-//             : (nombreCompleto || datos.razonSocial || 'Solicitante'));
-//     const tiposSolicitante = {
-//         natural: 'Persona natural',
-//         juridica: 'Persona jurídica',
-//         menor: 'Niño, niña o adolescente',
-//         apoderado: 'Apoderado o tercero'
-//     };
-//     const tipoSolicitante = anonima
-//         ? 'Anónimo'
-//         : (tiposSolicitante[datos.tipoSolicitante] || datos.tipoSolicitante || 'No indicado');
-//     const fecha = new Intl.DateTimeFormat('es-CO', {
-//         day: 'numeric',
-//         month: 'long',
-//         year: 'numeric',
-//         timeZone: 'America/Bogota'
-//     }).format(new Date(respuestaServidor.fechaRadicacion || new Date()));
-
-//     const canvasCodigo = document.createElement('canvas');
-//     window.JsBarcode(canvasCodigo, radicado, {
-//         format: 'CODE128',
-//         displayValue: true,
-//         font: 'Arial',
-//         fontSize: 12,
-//         height: 34,
-//         margin: 0,
-//         width: 1.35,
-//         textMargin: 2
-//     });
-
-//     pdf.setProperties({
-//         title: `Comprobante de radicación ${radicado}`,
-//         subject: 'Comprobante de radicación - Secretaría de Movilidad de Cali'
-//     });
-
-//     const cajaX = 86;
-//     const cajaY = 12;
-//     const cajaAncho = anchoPagina - cajaX - 14;
-//     const cajaAlto = 56;
-//     pdf.setFillColor(242, 243, 245);
-//     pdf.setDrawColor(31, 47, 82);
-//     pdf.setLineWidth(0.55);
-//     pdf.roundedRect(cajaX, cajaY, cajaAncho, cajaAlto, 7, 7, 'FD');
-
-//     const filasCabecera = [
-//         ['Destino', 'SECRETARÍA DE MOVILIDAD'],
-//         ['Remitente', remitente],
-//         ['Tipo solicitante', tipoSolicitante],
-//         ['Tipo radicación', datos.tipoSolicitud || 'Petición'],
-//         ['Fecha radicación', fecha]
-//     ];
-//     let yCabecera = cajaY + 7;
-//     filasCabecera.forEach(([etiqueta, valor]) => {
-//         pdf.setFont('helvetica', 'normal');
-//         pdf.setFontSize(7.5);
-//         pdf.setTextColor(35, 45, 60);
-//         pdf.text(etiqueta, cajaX + 5, yCabecera);
-//         pdf.setFont('helvetica', 'bold');
-//         pdf.text(String(valor || '-').slice(0, 52), cajaX + 32, yCabecera, { maxWidth: cajaAncho - 37 });
-//         yCabecera += 5;
-//     });
-
-//     const barcodeData = canvasCodigo.toDataURL('image/png');
-//     const barcodeAncho = Math.min(83, cajaAncho - 14);
-//     pdf.addImage(barcodeData, 'PNG', cajaX + (cajaAncho - barcodeAncho) / 2, cajaY + 32, barcodeAncho, 19);
-
-//     pdf.setFont('helvetica', 'normal');
-//     pdf.setFontSize(11);
-//     pdf.setTextColor(25, 35, 50);
-//     pdf.text(`Santiago de Cali, ${fecha}`, margen, y);
-//     y += 13;
-
-//     const agregarParrafo = (texto, opciones = {}) => {
-//         const fuente = opciones.bold ? 'bold' : 'normal';
-//         const tamano = opciones.size || 11;
-//         const espacio = opciones.gap ?? 5;
-//         pdf.setFont('helvetica', fuente);
-//         pdf.setFontSize(tamano);
-//         pdf.setTextColor(25, 35, 50);
-//         const lineas = pdf.splitTextToSize(String(texto || ''), anchoTexto);
-//         const altoBloque = lineas.length * tamano * 0.43;
-//         if (y + altoBloque > altoPagina - 27) {
-//             pdf.addPage();
-//             y = 24;
-//         }
-//         pdf.text(lineas, margen, y);
-//         y += altoBloque + espacio;
-//     };
-
-//     agregarParrafo('Señores,', { gap: 1 });
-//     agregarParrafo('SECRETARÍA DE MOVILIDAD', { bold: true, gap: 1 });
-//     agregarParrafo('Alcaldía Distrital de Santiago de Cali', { gap: 9 });
-//     agregarParrafo('Asunto:', { bold: true, gap: 1 });
-//     agregarParrafo(datos.asunto || 'Sin asunto registrado', { gap: 8 });
-//     agregarParrafo('Solicitud:', { bold: true, gap: 1 });
-//     agregarParrafo(datos.contenido || 'Sin descripción registrada', { gap: 8 });
-
-//     agregarParrafo('Atentamente,', { gap: 20 });
-//     if (y + 35 > altoPagina - 15) {
-//         pdf.addPage();
-//         y = 24;
-//     }
-//     pdf.setDrawColor(55, 65, 81);
-//     pdf.line(margen, y, margen + 88, y);
-//     y += 5;
-//     agregarParrafo(`Peticionario: ${remitente}`, { bold: true, size: 10, gap: 2 });
-//     agregarParrafo(`Tipo de solicitante: ${tipoSolicitante}`, { size: 10, gap: 2 });
-
-//     if (!anonima) {
-//         if (datos.documento) {
-//             const tipoDocumento = datos.tipoDocumento || 'Documento';
-//             agregarParrafo(`${tipoDocumento}: ${datos.documento}`, { size: 10, gap: 2 });
-//         }
-//         if (datos.correo) agregarParrafo(`Correo: ${datos.correo}`, { size: 10, gap: 2 });
-//         if (datos.direccion) agregarParrafo(`Dirección: ${datos.direccion}`, { size: 10, gap: 2 });
-//         const telefono = datos.celular || datos.fijo;
-//         if (telefono) agregarParrafo(`Teléfono: ${telefono}`, { size: 10, gap: 2 });
-//     }
-
-//     if (datos.anexo1 || datos.anexo2 || datos.anexo3) {
-//         agregarParrafo('Ver archivos adjuntos en el sistema.', { size: 9, gap: 2 });
-//     }
-
-//     pdf.save(`Radicacion-${radicado}.pdf`);
-// }
 
 async function descargarPdfRadicacion(respuestaServidor) {
-
-    const datos = respuestaServidor.objetoPQR || {};
     const radicado = String(respuestaServidor.Rad || '').trim();
+    const base64 = respuestaServidor.pdfBase64;
 
     if (!radicado) {
         throw new Error('El servidor no devolvió el número de radicado.');
     }
-    if (!window.jspdf?.jsPDF || !window.JsBarcode) {
-        throw new Error('No se cargaron las librerías locales para crear el PDF.');
+
+    if (!base64) {
+        throw new Error('El servidor no devolvió el archivo PDF.');
     }
 
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'letter' });
-    const anchoPagina = pdf.internal.pageSize.getWidth();
-    const altoPagina = pdf.internal.pageSize.getHeight();
-    const margen = 25;
-    const anchoTexto = anchoPagina - margen * 2;
-    let y = 73;
+    const binario = atob(base64);
+    const bytes = new Uint8Array(binario.length);
 
-    const anonima = Boolean(datos.anonima);
-    const nombreCompleto = [
-        datos.primerNombre,
-        datos.segundoNombre,
-        datos.primerApellido,
-        datos.segundoApellido
-    ].filter(Boolean).join(' ').trim();
-    const remitente = anonima
-        ? 'Solicitante anónimo'
-        : (datos.tipoSolicitante === 'juridica'
-            ? (datos.razonSocial || nombreCompleto || 'Solicitante')
-            : (nombreCompleto || datos.razonSocial || 'Solicitante'));
-    const tiposSolicitante = {
-        natural: 'Persona natural',
-        juridica: 'Persona jurídica',
-        menor: 'Niño, niña o adolescente',
-        apoderado: 'Apoderado o tercero'
-    };
-    const tipoSolicitante = anonima
-        ? 'Anónimo'
-        : (tiposSolicitante[datos.tipoSolicitante] || datos.tipoSolicitante || 'No indicado');
-    const fecha = new Intl.DateTimeFormat('es-CO', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-        timeZone: 'America/Bogota'
-    }).format(new Date(respuestaServidor.fechaRadicacion || new Date()));
-
-    const canvasCodigo = document.createElement('canvas');
-    window.JsBarcode(canvasCodigo, radicado, {
-        format: 'CODE128',
-        displayValue: true,
-        font: 'Arial',
-        fontSize: 12,
-        height: 34,
-        margin: 0,
-        width: 1.35,
-        textMargin: 2
-    });
-
-    pdf.setProperties({
-        title: `Comprobante de radicación ${radicado}`,
-        subject: 'Comprobante de radicación - Secretaría de Movilidad de Cali'
-    });
-
-    const cajaX = 86;
-    const cajaY = 12;
-    const cajaAncho = anchoPagina - cajaX - 14;
-    const cajaAlto = 56;
-    pdf.setFillColor(242, 243, 245);
-    pdf.setDrawColor(31, 47, 82);
-    pdf.setLineWidth(0.55);
-    pdf.roundedRect(cajaX, cajaY, cajaAncho, cajaAlto, 7, 7, 'FD');
-
-    const filasCabecera = [
-        ['Destino', 'SECRETARÍA DE MOVILIDAD'],
-        ['Remitente', remitente],
-        ['Tipo solicitante', tipoSolicitante],
-        ['Tipo radicación', datos.tipoSolicitud || 'Petición'],
-        ['Fecha radicación', fecha]
-    ];
-    let yCabecera = cajaY + 7;
-    filasCabecera.forEach(([etiqueta, valor]) => {
-        pdf.setFont('helvetica', 'normal');
-        pdf.setFontSize(7.5);
-        pdf.setTextColor(35, 45, 60);
-        pdf.text(etiqueta, cajaX + 5, yCabecera);
-        pdf.setFont('helvetica', 'bold');
-        pdf.text(String(valor || '-').slice(0, 52), cajaX + 32, yCabecera, { maxWidth: cajaAncho - 37 });
-        yCabecera += 5;
-    });
-
-    const barcodeData = canvasCodigo.toDataURL('image/png');
-    const barcodeAncho = Math.min(83, cajaAncho - 14);
-    pdf.addImage(barcodeData, 'PNG', cajaX + (cajaAncho - barcodeAncho) / 2, cajaY + 32, barcodeAncho, 19);
-
-    pdf.setFont('helvetica', 'normal');
-    pdf.setFontSize(11);
-    pdf.setTextColor(25, 35, 50);
-    pdf.text(`Santiago de Cali, ${fecha}`, margen, y);
-    y += 13;
-
-    // Función optimizada para evitar solapamientos y aplicar justificado limpio
-    const agregarParrafo = (texto, opciones = {}) => {
-        const fuente = opciones.bold ? 'bold' : 'normal';
-        const tamano = opciones.size || 11;
-        const espacio = opciones.gap ?? 5;
-        const alinear = opciones.align || 'left'; 
-
-        pdf.setFont('helvetica', fuente);
-        pdf.setFontSize(tamano);
-        pdf.setTextColor(25, 35, 50);
-
-        const lineas = pdf.splitTextToSize(String(texto || ''), anchoTexto);
-        // Factor de conversión seguro para puntos a milímetros según el tamaño de fuente
-        const interlineado = tamano * 0.40; 
-        const altoBloque = lineas.length * interlineado;
-
-        if (y + altoBloque > altoPagina - 27) {
-            pdf.addPage();
-            y = 24;
-        }
-
-        lineas.forEach((linea, index) => {
-            const esUltimaLinea = index === lineas.length - 1;
-            
-            // Solo justificar si se solicita, si hay más de una línea y no es la última línea del bloque
-            if (alinear === 'justify' && !esUltimaLinea && lineas.length > 1) {
-                const palabras = linea.trim().split(/\s+/);
-                if (palabras.length > 1) {
-                    const anchoSinEspacios = palabras.reduce((acc, palabra) => acc + pdf.getTextWidth(palabra), 0);
-                    const espacioTotalSobrante = anchoTexto - anchoSinEspacios;
-                    const espacioEntrePalabras = espacioTotalSobrante / (palabras.length - 1);
-
-                    let xActual = margen;
-                    palabras.forEach((palabra) => {
-                        pdf.text(palabra, xActual, y);
-                        xActual += pdf.getTextWidth(palabra) + espacioEntrePalabras;
-                    });
-                } else {
-                    pdf.text(linea, margen, y);
-                }
-            } else {
-                pdf.text(linea, margen, y);
-            }
-            y += interlineado;
-        });
-
-        y += (espacio - interlineado); // Añadir el espacio extra configurado tras el párrafo
-    };
-
-    agregarParrafo('Señores,', { gap: 4 });
-    agregarParrafo('SECRETARÍA DE MOVILIDAD', { bold: true, gap: 4 });
-    agregarParrafo('Alcaldía Distrital de Santiago de Cali', { gap: 9 });
-    
-    agregarParrafo('Asunto:', { bold: true, gap: 4 });
-    agregarParrafo(datos.asunto || 'Sin asunto registrado', { gap: 8, align: 'justify' });
-    
-    agregarParrafo('Solicitud:', { bold: true, gap: 4 });
-    agregarParrafo(datos.contenido || 'Sin descripción registrada', { gap: 10, align: 'justify' });
-
-    agregarParrafo('Atentamente,', { gap: 18 });
-    
-    if (y + 35 > altoPagina - 15) {
-        pdf.addPage();
-        y = 24;
-    }
-    
-    pdf.setDrawColor(55, 65, 81);
-    pdf.line(margen, y, margen + 88, y);
-    y += 6; // Espacio seguro tras la línea de firma
-    
-    agregarParrafo(`Peticionario: ${remitente}`, { bold: true, size: 10, gap: 4 });
-    agregarParrafo(`Tipo de solicitante: ${tipoSolicitante}`, { size: 10, gap: 4 });
-
-    if (!anonima) {
-        if (datos.documento) {
-            const tipoDocumento = datos.tipoDocumento || 'Documento';
-            agregarParrafo(`${tipoDocumento}: ${datos.documento}`, { size: 10, gap: 4 });
-        }
-        if (datos.correo) agregarParrafo(`Correo: ${datos.correo}`, { size: 10, gap: 4 });
-        if (datos.direccion) agregarParrafo(`Dirección: ${datos.direccion}`, { size: 10, gap: 4 });
-        const telefono = datos.celular || datos.fijo;
-        if (telefono) agregarParrafo(`Teléfono: ${telefono}`, { size: 10, gap: 4 });
+    for (let i = 0; i < binario.length; i++) {
+        bytes[i] = binario.charCodeAt(i);
     }
 
-    if (datos.anexo1 || datos.anexo2 || datos.anexo3) {
-        agregarParrafo('Ver archivos adjuntos en el sistema.', { size: 9, gap: 4 });
-    }
+    const archivo = new Blob([bytes], { type: 'application/pdf' });
+    const url = URL.createObjectURL(archivo);
+    const enlace = document.createElement('a');
 
-    pdf.save(`Radicacion-${radicado}.pdf`);
+    enlace.href = url;
+    enlace.download = respuestaServidor.pdfNombre
+        || `Radicacion-${radicado}.pdf`;
+
+    document.body.appendChild(enlace);
+    enlace.click();
+    enlace.remove();
+
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
+
 
 function finalizarTodo() {
     

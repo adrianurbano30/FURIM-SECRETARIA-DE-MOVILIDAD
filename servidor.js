@@ -3,6 +3,10 @@ const express = require('express');
 const ExcelJS = require('exceljs');
 const fs = require('node:fs');
 const path = require('node:path');
+const { PDFDocument } = require('pdfkit');
+const { resolve } = require('node:dns');
+const nodemailer = require('nodemailer');
+const JsBarcode = require('jsbarcode');
 
 const app = express();
 const PUERTO = 3000;
@@ -16,10 +20,7 @@ const RUTA_EXCEL = path.join(__dirname, 'Registro_FURIM.xlsx');
 app.use(express.json({ limit: '1mb' }));
 
 // Permitir solicitudes desde Live Server durante las pruebas.
-const origenesPermitidos = new Set([
-    'http://127.0.0.1:5500',
-    'http://localhost:5500'
-]);
+const origenesPermitidos = new Set(['http://127.0.0.1:5500','http://localhost:5500']);
 
 app.use((req, res, next) => {
     const origen = req.headers.origin;
@@ -48,6 +49,327 @@ app.get('/estado', (req, res) => {
         mensaje: 'Servidor local FURIM funcionando'
     });
 });
+
+///funcion genear  PDF
+
+// function generarPdfRadicacion(datos,radicado,fecharadicacion){
+
+//     return new Promise((resolve,reject)=>{
+
+//         const doc = new PDFDocument({
+//             size: 'LETTER',
+//             margins:  { top: 50, bottom: 50, left: 55, right: 55 }
+//         });
+
+//         const partes = [];
+
+//         doc.on('data', parte => partes.push(parte));
+//         doc.on('end', () => resolve(Buffer.concat(partes)));
+//         doc.on('error', reject);
+
+//          const anonima = Boolean(datos.anonima);
+
+//           const nombreCompleto = [
+//             datos.primerNombre,
+//             datos.segundoNombre,
+//             datos.primerApellido,
+//             datos.segundoApellido
+//           ].filter(Boolean).join(' ').trim();
+
+//           const remitente = anonima ? 'Solicitante anónimo': (datos.tipoSolicitante === 'juridica'? datos.razonSocial || nombreCompleto || 'Solicitante': nombreCompleto || datos.razonSocial || 'Solicitante');
+
+//           const tiposSolicitante = {
+//             natural: 'Persona natural',
+//             juridica: 'Persona jurídica',
+//             menor: 'Niño, niña o adolescente',
+//             apoderado: 'Apoderado o tercero'
+//         };
+
+//         const tipoSolicitante = anonima
+//             ? 'Anónimo'
+//             : (tiposSolicitante[datos.tipoSolicitante]
+//                 || datos.tipoSolicitante
+//                 || 'No indicado');
+
+//         const fecha = new Intl.DateTimeFormat('es-CO', {
+//             dateStyle: 'long',
+//             timeZone: 'America/Bogota'
+//         }).format(new Date(fecharadicacion));
+
+//         doc.fontSize(18).font('Helvetica-Bold').text('Comprobante de radicación', { align: 'center' });
+
+//         doc.moveDown();
+//         doc.fontSize(12).font('Helvetica-Bold').text(`Número de radicado: ${radicado}`);
+//         doc.font('Helvetica').text(`Fecha: ${fecha}`);
+//         doc.text(`Remitente: ${remitente}`);
+//         doc.text(`Tipo de solicitante: ${tipoSolicitante}`);
+
+//         if (!anonima && datos.documento) {
+//             doc.text(`Documento: ${datos.documento}`);
+//         }
+
+//         if (!anonima && datos.correo) {
+//             doc.text(`Correo: ${datos.correo}`);
+//         }
+
+//         doc.moveDown().font('Helvetica-Bold').text('Asunto:');
+
+//         doc.font('Helvetica').text(datos.asunto || 'Sin asunto registrado');
+
+//         doc.moveDown().font('Helvetica-Bold').text('Solicitud:');
+
+//         doc.font('Helvetica').text(datos.contenido || 'Sin descripción registrada');
+
+//         doc.end();
+
+
+//     });
+
+// }   
+
+function generarPdfRadicacion(datos, radicado, fechaRadicacion) {
+    return new Promise((resolve, reject) => {
+        const doc = new PDFDocument({
+            size: 'LETTER',
+            margins: { top: 72, bottom: 50, left: 71, right: 71 }
+        });
+
+        const partes = [];
+
+        doc.on('data', parte => partes.push(parte));
+        doc.on('end', () => resolve(Buffer.concat(partes)));
+        doc.on('error', reject);
+
+        const anonima = Boolean(datos.anonima);
+
+        const nombreCompleto = [
+            datos.primerNombre,
+            datos.segundoNombre,
+            datos.primerApellido,
+            datos.segundoApellido
+        ].filter(Boolean).join(' ').trim();
+
+        const remitente = anonima
+            ? 'Solicitante anónimo'
+            : datos.tipoSolicitante === 'juridica'
+                ? datos.razonSocial || nombreCompleto || 'Solicitante'
+                : nombreCompleto || datos.razonSocial || 'Solicitante';
+
+        const tiposSolicitante = {
+            natural: 'Persona natural',
+            juridica: 'Persona jurídica',
+            menor: 'Niño, niña o adolescente',
+            apoderado: 'Apoderado o tercero'
+        };
+
+        const tipoSolicitante = anonima
+            ? 'Anónimo'
+            : tiposSolicitante[datos.tipoSolicitante]
+                || datos.tipoSolicitante
+                || 'No indicado';
+
+        const fecha = new Intl.DateTimeFormat('es-CO', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+            timeZone: 'America/Bogota'
+        }).format(new Date(fechaRadicacion));
+
+        const anchoPagina = doc.page.width;
+        const margenIzquierdo = 71;
+        const anchoTexto = anchoPagina - margenIzquierdo - 71;
+
+        // Ficha superior del radicado
+        const cajaX = 244;
+        const cajaY = 34;
+        const cajaAncho = anchoPagina - cajaX - 40;
+        const cajaAlto = 159;
+
+        doc.roundedRect(cajaX, cajaY, cajaAncho, cajaAlto, 20)
+            .fillAndStroke('#F2F3F5', '#1F2F52');
+
+        const filasCabecera = [
+            ['Destino', 'SECRETARÍA DE MOVILIDAD'],
+            ['Remitente', remitente],
+            ['Tipo solicitante', tipoSolicitante],
+            ['Tipo radicación', datos.tipoSolicitud || 'Petición'],
+            ['Fecha radicación', fecha]
+        ];
+
+        let yCabecera = cajaY + 20;
+
+        filasCabecera.forEach(([etiqueta, valor]) => {
+            doc.font('Helvetica')
+                .fontSize(7.5)
+                .fillColor('#232D3C')
+                .text(etiqueta, cajaX + 15, yCabecera, { width: 74 });
+
+            doc.font('Helvetica-Bold')
+                .fontSize(7.5)
+                .fillColor('#111827')
+                .text(String(valor || '-').slice(0, 52), cajaX + 92, yCabecera, {
+                    width: cajaAncho - 105,
+                    ellipsis: true
+                });
+
+            yCabecera += 14;
+        });
+
+        // Generar CODE128 con JsBarcode y dibujarlo como vectores en PDFKit
+        const resultadoCodigo = {};
+
+        JsBarcode(resultadoCodigo, String(radicado), {
+            format: 'CODE128',
+            displayValue: false,
+            margin: 0
+        });
+
+        const bitsCodigo = resultadoCodigo.encodings?.[0]?.data;
+
+        if (!bitsCodigo) {
+            throw new Error('No se pudo generar el código de barras del radicado.');
+        }
+
+        const anchoMaximoCodigo = cajaAncho - 30;
+        const anchoModulo = Math.min(1.25, anchoMaximoCodigo / bitsCodigo.length);
+        const anchoCodigo = bitsCodigo.length * anchoModulo;
+        const xCodigo = cajaX + (cajaAncho - anchoCodigo) / 2;
+        const yCodigo = cajaY + 105;
+        const altoCodigo = 31;
+
+        doc.fillColor('#111827');
+
+        for (let i = 0; i < bitsCodigo.length; i++) {
+            if (bitsCodigo[i] === '1') {
+                doc.rect(
+                    xCodigo + i * anchoModulo,
+                    yCodigo,
+                    anchoModulo,
+                    altoCodigo
+                );
+            }
+        }
+
+        doc.fill();
+
+        doc.font('Helvetica-Bold')
+            .fontSize(12)
+            .fillColor('#111827')
+            .text(String(radicado), cajaX, cajaY + 140, {
+                width: cajaAncho,
+                align: 'center'
+            });
+
+        // Cuerpo de la radicación
+        doc.x = margenIzquierdo;
+        doc.y = 207;
+
+        const agregarParrafo = (
+            texto,
+            { negrita = false, tamano = 11, espacio = 0.5, alineacion = 'left' } = {}
+        ) => {
+            doc.font(negrita ? 'Helvetica-Bold' : 'Helvetica')
+                .fontSize(tamano)
+                .fillColor('#192332')
+                .text(String(texto || ''), {
+                    width: anchoTexto,
+                    align: alineacion,
+                    lineGap: 2
+                });
+
+            doc.moveDown(espacio);
+        };
+
+        agregarParrafo(`Santiago de Cali, ${fecha}`, { gap: 0.8 });
+        agregarParrafo('Señores,', { espacio: 0.3 });
+        agregarParrafo('SECRETARÍA DE MOVILIDAD', { negrita: true, espacio: 0.3 });
+        agregarParrafo('Alcaldía Distrital de Santiago de Cali', { espacio: 0.8 });
+
+        agregarParrafo('Asunto:', { negrita: true, espacio: 0.3 });
+        agregarParrafo(datos.asunto || 'Sin asunto registrado', {
+            espacio: 0.7,
+            alineacion: 'justify'
+        });
+
+        agregarParrafo('Solicitud:', { negrita: true, espacio: 0.3 });
+        agregarParrafo(datos.contenido || 'Sin descripción registrada', {
+            espacio: 1,
+            alineacion: 'justify'
+        });
+
+        agregarParrafo('Atentamente,', { espacio: 1.5 });
+
+        // Mantener juntos la línea de firma y los datos del solicitante
+        if (doc.y + 125 > doc.page.height - doc.page.margins.bottom) {
+            doc.addPage();
+        }
+
+        doc.moveDown(0.5);
+        doc.moveTo(margenIzquierdo, doc.y)
+            .lineTo(margenIzquierdo + 255, doc.y)
+            .strokeColor('#374151')
+            .lineWidth(0.8)
+            .stroke();
+
+        doc.moveDown(0.3);
+
+        agregarParrafo(`Peticionario: ${remitente}`, {
+            negrita: true,
+            tamano: 10,
+            espacio: 0.25
+        });
+
+        agregarParrafo(`Tipo de solicitante: ${tipoSolicitante}`, {
+            tamano: 10,
+            espacio: 0.25
+        });
+
+        if (!anonima) {
+            if (datos.documento) {
+                agregarParrafo(
+                    `${datos.tipoDocumento || 'Documento'}: ${datos.documento}`,
+                    { tamano: 10, espacio: 0.25 }
+                );
+            }
+
+            if (datos.correo) {
+                agregarParrafo(`Correo: ${datos.correo}`, {
+                    tamano: 10,
+                    espacio: 0.25
+                });
+            }
+
+            if (datos.direccion) {
+                agregarParrafo(`Dirección: ${datos.direccion}`, {
+                    tamano: 10,
+                    espacio: 0.25
+                });
+            }
+
+            const telefono = datos.celular || datos.fijo;
+
+            if (telefono) {
+                agregarParrafo(`Teléfono: ${telefono}`, {
+                    tamano: 10,
+                    espacio: 0.25
+                });
+            }
+        }
+
+        if (datos.anexo1 || datos.anexo2 || datos.anexo3) {
+            agregarParrafo('Ver archivos adjuntos en el sistema.', {
+                tamano: 9,
+                espacio: 0.25
+            });
+        }
+
+        doc.end();
+    });
+}
+
+
+//end funcion generar PDF
+
 
 // Recibir una radicación y guardarla en Excel.
 app.post('/guardar-radicacion', async (req, res) => {
@@ -134,39 +456,6 @@ app.post('/guardar-radicacion', async (req, res) => {
    const radicadoGenerado = anoActual + radicacion.codigoDependencia + aleatorio + 2;     
    console.log('tipo solicitante ->', radicacion.tipoSolicitante);
 
-        // Añadir una fila nueva por cada envío.
-        // hoja.addRow({
-        //     fechaRegistro: new Date().toLocaleString('es-CO'),
-        //     radicado: texto(radicacion.radicado),
-        //     dependencia: texto(radicacion.dependencia),
-        //     codigoDependencia: texto(radicacion.codigoDependencia),
-        //     funcion: texto(radicacion.funcion),
-        //     tipoSolicitante: texto(radicacion.tipoSolicitante),
-        //     primerNombre: texto(radicacion.primerNombre),
-        //     segundoNombre: texto(radicacion.segundoNombre),
-        //     primerApellido: texto(radicacion.primerApellido),
-        //     segundoApellido: texto(radicacion.segundoApellido),
-        //     tipoDocumento: texto(radicacion.tipoDocumento),
-        //     documento: texto(radicacion.documento),
-        //     correo: texto(radicacion.correo),
-        //     direccion: texto(radicacion.direccion),
-        //     celular: texto(radicacion.celular),
-        //     fijo: texto(radicacion.fijo),
-        //     pais: texto(radicacion.pais),
-        //     departamento: texto(radicacion.departamento),
-        //     municipio: texto(radicacion.municipio),
-        //     razonSocial: texto(radicacion.razonSocial),
-        //     tipoSolicitud: texto(radicacion.tipoSolicitud),
-        //     asunto: texto(radicacion.asunto),
-        //     contenido: texto(radicacion.contenido),
-        //     medioRespuesta: texto(radicacion.medioRespuesta),
-        //     anonima: radicacion.anonima ? 'Sí' : 'No',
-        //     aceptaPolitica: radicacion.aceptaPolitica ? 'Sí' : 'No',
-        //     anexo1: texto(radicacion.anexo1),
-        //     anexo2: texto(radicacion.anexo2),
-        //     anexo3: texto(radicacion.anexo3)
-        // });
-
 
     //texto(radicacion.radicado),
     const fechaRadicacion = new Date();
@@ -177,7 +466,7 @@ app.post('/guardar-radicacion', async (req, res) => {
     texto(radicacion.codigoDependencia),
     texto(radicacion.asunto),
     texto(radicacion.funcion),
-    texto(radicacion.tipoSolicitante ? 'anónimo' : radicacion.tipoSolicitante),
+    texto(radicacion.tipoSolicitante ? radicacion.tipoSolicitante : 'Anonimo'),
     texto(radicacion.primerNombre),
     texto(radicacion.segundoNombre),
     texto(radicacion.primerApellido),
@@ -222,13 +511,201 @@ console.log('Excel guardado en:', RUTA_EXCEL);
 console.log('Radicado guardado:', radicacion.radicado);
 
 
-        return res.json({
+let pdfGenerado = false;
+let pdfBuffer;
+//let vistaCorreoPrueba = null; 
+
+
+
+try {
+
+    pdfBuffer = await generarPdfRadicacion(
+          radicacion,
+          radicadoGenerado,
+          fechaRadicacion
+    );
+
+    // const rutaPdf = path.join(
+    //     __dirname,
+    //     `Comprobante-prueba-${radicadoGenerado}.pdf`
+    // );
+
+    // await fs.promises.writeFile(rutaPdf, pdfBuffer);
+    console.log('PDF generado en memoria:', pdfBuffer.length, 'bytes');
+    pdfGenerado = true;
+
+    // //console.log('PDF de prueba guardado en:', rutaPdf);
+    } catch (errorPdf) {
+        // El Excel ya se guardó; un fallo del PDF no debe reportar
+        // como fallida toda la radicación.
+        console.error('Error al generar el PDF de prueba:', errorPdf);  
+    }
+
+
+    //bloque de envio
+
+    if (!radicacion.anonima && radicacion.correo && pdfBuffer) {
+       try {
+       
+
+        const usuarioSMTP = process.env.FURIM_SMTP_USER;
+        const claveSMTP = process.env.FURIM_SMTP_APP_PASSWORD;
+
+        if (!usuarioSMTP || !claveSMTP) {
+            throw new Error('Faltan las variables SMTP de prueba.');
+        }
+
+        const transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false,
+            auth: {
+            user: usuarioSMTP,
+            pass: claveSMTP
+        }
+       });
+
+       const escaparHtml = valor => String(valor ?? '').replace(/[&<>"']/g, caracter => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+       }[caracter]));
+
+       const radicadoHtml = escaparHtml(radicadoGenerado);
+       const dependenciaHtml = escaparHtml(radicacion.dependencia);
+       const fechaCorreo = new Intl.DateTimeFormat('es-CO', {
+        dateStyle: 'long',
+        timeStyle: 'short',
+        timeZone: 'America/Bogota'
+      }).format(fechaRadicacion);
+
+
+       
+        const info = await transporter.sendMail({
+    from: `Formulario FURIM <${usuarioSMTP}>`,
+    to: radicacion.correo,
+    subject: `Comprobante de radicación ${radicadoGenerado}`,
+
+    text: `Cordial saludo.
+
+Hemos recibido la información enviada a través del Formulario de Radicación.
+
+Número de radicado: ${radicadoGenerado}
+Fecha de recepción: ${fechaCorreo}
+Dependencia: ${radicacion.dependencia}
+
+Adjuntamos el comprobante en PDF. Le recomendamos conservar el número de radicado para futuras consultas.
+
+Atentamente,
+Formulario de Radicación
+Secretaría de Movilidad
+Alcaldía Distrital de Santiago de Cali`,
+
+    html: `
+        <!doctype html>
+        <html lang="es">
+        <body style="margin:0;padding:24px;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+                <tr>
+                    <td align="center">
+                        <table role="presentation" width="600" cellspacing="0" cellpadding="0"
+                            style="width:100%;max-width:600px;background:#ffffff;border:1px solid #dbe3ec;border-radius:12px;overflow:hidden;">
+                            <tr>
+                                <td style="padding:24px 30px;background:#002855;border-bottom:5px solid #DB8700;color:#ffffff;">
+                                    <div style="font-size:12px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;">
+                                        Alcaldía Distrital de Santiago de Cali
+                                    </div>
+                                    <div style="margin-top:6px;font-size:20px;font-weight:bold;">
+                                        Secretaría de Movilidad
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="padding:30px;">
+                                    <h1 style="margin:0 0 16px;color:#002855;font-size:21px;">
+                                        Comprobante de radicación
+                                    </h1>
+
+                                    <p style="margin:0 0 20px;font-size:15px;line-height:1.6;">
+                                        Cordial saludo. Hemos recibido la información enviada a través del
+                                        Formulario de Radicación.
+                                    </p>
+
+                                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0"
+                                        style="margin:0 0 20px;border-collapse:collapse;background:#f8fafc;border:1px solid #dbe3ec;">
+                                        <tr>
+                                            <td style="padding:16px 18px;">
+                                                <div style="color:#64748b;font-size:11px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;">
+                                                    Número de radicado
+                                                </div>
+                                                <div style="margin-top:6px;color:#002855;font-size:22px;font-weight:bold;word-break:break-word;">
+                                                    ${radicadoHtml}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <p style="margin:0 0 8px;font-size:14px;">
+                                        <strong>Fecha de recepción:</strong> ${escaparHtml(fechaCorreo)}
+                                    </p>
+                                    <p style="margin:0 0 20px;font-size:14px;">
+                                        <strong>Dependencia:</strong> ${dependenciaHtml}
+                                    </p>
+
+                                    <p style="margin:0;font-size:14px;line-height:1.6;">
+                                        Adjuntamos el comprobante en PDF. Le recomendamos conservar el número
+                                        de radicado para futuras consultas.
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="padding:18px 30px;background:#f8fafc;border-top:1px solid #e2e8f0;color:#64748b;font-size:12px;line-height:1.5;">
+                                    Mensaje automático del Formulario de Radicación.<br>
+                                    Secretaría de Movilidad · Alcaldía Distrital de Santiago de Cali
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </body>
+        </html>
+    `,
+
+    attachments: [{
+        filename: `Radicacion-${radicadoGenerado}.pdf`,
+        content: pdfBuffer,
+        contentType: 'application/pdf'
+    }]
+});
+
+        // vistaCorreoPrueba = nodemailer.getTestMessageUrl(info);
+        // console.log('Vista del correo de prueba:', vistaCorreoPrueba);
+        console.log('Correo enviado. Id:', info.messageId);
+        } catch (errorCorreo) {
+        console.error('Error al enviar el correo de prueba:', errorCorreo);
+        }
+    }
+
+    //endbloque de envio
+
+
+
+
+
+return res.json({
             ok: true,
             Rad:radicadoGenerado,
             fechaRadicacion: fechaRadicacion.toISOString(),
             objetoPQR:radicacion,
+            pdfBase64: pdfBuffer ? pdfBuffer.toString('base64') : null,
+            pdfNombre: `Radicacion-${radicadoGenerado}.pdf`,
             mensaje: 'Radicación guardada en Excel.'
-        });
+});
 
     } catch (error) {
         console.error('Error al guardar la radicación:', error);
