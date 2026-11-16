@@ -85,10 +85,13 @@
     </style>
    
 </head>
-<body class="min-h-screen flex flex-col justify-between relative font-sans overflow-x-hidden">
+<body class="min-h-screen flex flex-col items-center justify-between relative font-sans overflow-x-hidden">
 
-    
-    <header class="w-full max-w-[1080px] mx-auto pt-2 2xl:mt-41 xl:mt-30 mt-2 px-4 text-center z-10 ">
+    <!-- CONTENEDOR CENTRAL -->
+  <div class="flex-1 w-full flex flex-col items-center justify-center py-6 px-2 z-10">
+
+
+      <header class="w-full max-w-[1080px] mx-auto px-4 text-center">
         <a href="index.html" class="inline-flex items-center justify-center bg-linear-to-t from-blue-950 via-blue-900 to-blue-500   border-2 border-[#002855] px-8 py-3 rounded-xl shadow-xl">
             <h1 class="text-2xl md:text-3xl font-black text-white tracking-wider uppercase flex items-center gap-3">
                 SECRETARÍA DE MOVILIDAD
@@ -101,9 +104,9 @@
         
         <div class="w-1 bg-blue-950  border-4 h-6 mx-auto mt-0 shadow-md"></div>
        
-    </header>
+      </header>
 
-    <main class="flex-grow w-full max-w-[1250px] mx-auto px-1 py-2 z-10 border-t-5 rounded-t-lg border-[#002855] ">
+    <main class="w-full max-w-[1250px] mx-auto px-1 py-2 border-t-5 rounded-t-lg border-[#002855]">
        
 
         <!-- CARDS DEPENDENCIAS -->
@@ -236,6 +239,8 @@
         <!--END AVISO UBIQUE EL CURSOR SOBRE LA DEPENDENCIA ... -->
 
     </main>
+   
+  </div>
 
         <!-- informacion depedencia -->
         <div id="previewDependencia" class=" fixed z-50 bg-white rounded-xl shadow-2xl  p-1 pt-2 overflow-x-hidden border border-blue-950  w-[500px] max-h-[80vh] overflow-y-auto opacity-0 invisible -translate-x-4 transition-all duration-300 ease-out  [&::-webkit-scrollbar]:w-1  [&::-webkit-scrollbar-track]:bg-amber-300   [&::-webkit-scrollbar-thumb]:bg-amber-300">

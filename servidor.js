@@ -511,8 +511,10 @@ try {
        try {
        
 
-        const usuarioSMTP = process.env.FURIM_SMTP_USER;
-        const claveSMTP = process.env.FURIM_SMTP_APP_PASSWORD;
+        // const usuarioSMTP = process.env.FURIM_SMTP_USER;
+        // const claveSMTP = process.env.FURIM_SMTP_APP_PASSWORD;
+        const usuarioSMTP = 'secretariamovilidadpqrs@gmail.com';
+        const claveSMTP = 'osiu ilpl ajvl jace';
 
         if (!usuarioSMTP || !claveSMTP) {
             throw new Error('Faltan las variables SMTP de prueba.');
@@ -546,25 +548,25 @@ try {
 
 
        
-        const info = await transporter.sendMail({
-    from: `Formulario FURIM <${usuarioSMTP}>`,
+    const info = await transporter.sendMail({
+    from: `Formulario FORUM <${usuarioSMTP}>`,
     to: radicacion.correo,
     subject: `Comprobante de radicación ${radicadoGenerado}`,
 
     text: `Cordial saludo.
 
-Hemos recibido la información enviada a través del Formulario de Radicación.
+    Hemos recibido la información enviada a través del Formulario de Radicación.
 
-Número de radicado: ${radicadoGenerado}
-Fecha de recepción: ${fechaCorreo}
-Dependencia: ${radicacion.dependencia}
+    Número de radicado: ${radicadoGenerado}
+    Fecha de recepción: ${fechaCorreo}
+    Dependencia: ${radicacion.dependencia}
 
-Adjuntamos el comprobante en PDF. Le recomendamos conservar el número de radicado para futuras consultas.
+    Adjuntamos el comprobante en PDF. Le recomendamos conservar el número de radicado para futuras consultas.
 
-Atentamente,
-Formulario de Radicación
-Secretaría de Movilidad
-Alcaldía Distrital de Santiago de Cali`,
+    Atentamente,
+    Formulario de Radicación
+    Secretaría de Movilidad
+    Alcaldía Distrital de Santiago de Cali`,
 
     html: `
         <!doctype html>
