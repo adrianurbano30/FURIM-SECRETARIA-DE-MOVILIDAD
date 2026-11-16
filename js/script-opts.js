@@ -799,13 +799,13 @@ function cargarFuncionesDespachoSecretario(dep, dependencia, funciones) {
 
     dependencia.funciones.forEach(funcion => {
         const item = document.createElement("div");
-        item.className = "mb-2";
+        item.className = "mb-1";
 
         const label = document.createElement("label");
         label.className =
-            "flex items-start gap-1 transition duration-700 hover:text-slate-800 " +
-            "text-slate-600 cursor-pointer border border-slate-400 rounded-xl " +
-            "p-2 shadow-sm shadow-amber-300";
+            "flex items-start gap-1 transition duration-700 hover:text-slate-900 " +
+            "text-slate-700 cursor-pointer border border-slate-400 rounded-xl " +
+            "p-1 shadow-sm shadow-amber-300";
 
         label.innerHTML = `
             <input type="radio" name="previewFuncion" class="mt-1">
@@ -815,7 +815,7 @@ function cargarFuncionesDespachoSecretario(dep, dependencia, funciones) {
         const subfunciones = document.createElement("div");
         subfunciones.className =
             "hidden mt-2 ml-3 rounded-xl border-2 border-[#DB8700] " +
-            "bg-amber-50 p-3";
+            "bg-amber-50 p-1";
 
         label.querySelector("input").addEventListener("change", () => {
             if (funcion === "Requerimiento Entes de Control") {
@@ -851,16 +851,16 @@ function mostrarSubfuncionesEntesControl(dep,contenedor){
             Seleccione el ente de control
         </h3>
         <div id="listaSubfuncionesEntes" class="space-y-1"></div>
-        <div id="camposPersonerias" class="hidden mt-3 space-y-2">
+        <div id="camposPersonerias" class="hidden mt-1 space-y-2">
             <label class="block text-sm font-medium">
                 N.º de Comisión
                 <div class="flex flex-row items-center gap-2"> 
                 <input id="numeroComision" type="text" autofocus inputmode="numeric" autocomplete="off" placeholder="obligatorio" class="w-full border border-slate-400 bg-white rounded-lg p-2 focus:outline-none focus:border-[#DB8700]">
-                 <div class="relative group">
+                 <div class="relative group focus-within:outline-none" tabindex="0">
                         <div class="border-2 border-orange-700 font-bold bg-orange-500 rounded-full text-white text-lg h-7 w-7 flex transition-duration-300 items-center justify-center">
                           ?
                         </div>
-                        <div class="absolute z-50 -left-30 -translate-x-1/2 -top-10  mt-2 w-64 h-auto text-justify rounded-md bg-white text-slate-800  text-md p-1 shadow-md shadow-orange-200 opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out group-hover:opacity-100">
+                        <div class="absolute z-50 -left-30 -translate-x-1/2 top-full mt-2  w-64 text-justify rounded-md bg-white text-slate-800 text-md p-3 shadow-md shadow-orange-200 opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto">
                                 Escribe cual es el numero de comisión 
                         </div>
                 </div>
@@ -870,11 +870,11 @@ function mostrarSubfuncionesEntesControl(dep,contenedor){
                 N.º de Radicado Seguimiento Trámite
                 <div class="flex flex-row items-center gap-2"> 
                 <input id="numeroRadicadoSeguimiento" type="text" maxlength="18" inputmode="numeric" autocomplete="off" placeholder="obligatorio" class="w-full border border-slate-400 rounded-lg p-2 bg-white focus:outline-none focus:border-[#DB8700]">
-                <div class="relative group">
+                <div class="relative group focus-within:outline-none" tabindex="0">
                         <div class="border-2 border-orange-700 font-bold bg-orange-500 rounded-full text-white text-lg h-7 w-7 flex transition-duration-300 items-center justify-center">
                           ?
                         </div>
-                        <div class="absolute z-50 -left-30 -translate-x-1/2 -top-10  mt-2 w-64 h-auto text-justify rounded-md bg-white text-slate-800  text-md p-1 shadow-md shadow-orange-200 opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out group-hover:opacity-100">
+                        <div class="absolute z-50 -left-30 -translate-x-1/2 top-full mt-2  w-64 text-justify rounded-md bg-white text-slate-800 text-md p-3 shadow-md shadow-orange-200 opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto">
                                 Escribe cual es el numero de Radicado Pendiente del tramite de 18 digitos
                         </div>
                 </div>
