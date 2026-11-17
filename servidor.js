@@ -11,8 +11,7 @@ const JsBarcode = require('jsbarcode');
 const app = express();
 const PUERTO = 3000;
 
-const ENDPOINT_GOOGLE_CALIFICACIONES = 'https://script.google.com/macros/s/AKfycbyedgGZ9JY_JnY269h1UAjryY7jLSnRD8mYa1OGxt9IoPkUz2m0qSX6UiGfM-ldSq20SA/exec';
-
+const ENDPOINT_GOOGLE_CALIFICACIONES = "https://script.google.com/macros/s/AKfycbzbfv0i1vaMGKHDQ77ODSAwsfXI5KO_TSEuHUiWZy0YZtVYRZyrETOSHR1lXI4hFDnXQw/exec";
 
 // Archivo Excel que contendrá las radicaciones.
 const RUTA_EXCEL = path.join(__dirname, 'Registro_FURIM.xlsx');
@@ -686,9 +685,10 @@ return res.json({
 app.post('/guardar-calificacion', async (req, res) => {
     const { satisfaccion, motivo = '' } = req.body || {};
     const nivelesPermitidos = [
-        'Muy Satisfecho',
-        'Satisfecho',
-        'Insatisfecho'
+        'Excelente',
+        'Bueno',
+        'Regular',
+        'Malo'
     ];
 
     if (!nivelesPermitidos.includes(satisfaccion)) {

@@ -339,18 +339,23 @@
 
              <!-- OPCIONES DE SATISFACCIÓN -->
             <div class="space-y-3 mb-4">
-                <button type="button" onclick="procesarCalificacion('Muy Satisfecho')"  class="w-full p-3.5 bg-slate-50 hover:bg-emerald-50 hover:scale-110 transition duration-500 border border-slate-200 hover:border-emerald-500 rounded-2xl flex items-center justify-between group transition-all duration-200 cursor-pointer">
-                    <span class="text-lg font-bold text-slate-700 group-hover:text-emerald-700  uppercase  tracking-wider">😃 Muy Satisfecho</span>
+                <button type="button" onclick="procesarCalificacion('Excelente')"  class="w-full p-3.5 bg-slate-50 hover:bg-emerald-50 hover:scale-110 transition duration-500 border border-slate-200 hover:border-emerald-500 rounded-2xl flex items-center justify-between group transition-all duration-200 cursor-pointer">
+                    <span class="text-lg font-bold text-slate-700 group-hover:text-emerald-700  uppercase  tracking-wider">😃 Excelente</span>
                     <span class="text-lg text-emerald-600 opacity-0 group-hover:opacity-100 font-bold transition-opacity">✓</span>
                 </button>
 
-                <button type="button" onclick="procesarCalificacion('Satisfecho')"  class="w-full p-3.5 bg-slate-50 hover:bg-blue-50 hover:scale-110 transition duration-500 border border-slate-200 hover:border-blue-500 rounded-2xl flex items-center justify-between group transition-all duration-200 cursor-pointer">
-                    <span class="text-lg font-bold text-slate-700 group-hover:text-blue-700  uppercase   tracking-wider">🙂 Satisfecho</span>
+                <button type="button" onclick="procesarCalificacion('Bueno')"  class="w-full p-3.5 bg-slate-50 hover:bg-blue-50 hover:scale-110 transition duration-500 border border-slate-200 hover:border-blue-500 rounded-2xl flex items-center justify-between group transition-all duration-200 cursor-pointer">
+                    <span class="text-lg font-bold text-slate-700 group-hover:text-blue-700  uppercase   tracking-wider">🙂 Bueno</span>
                     <span class="text-lg text-blue-600 opacity-0 group-hover:opacity-100 font-bold transition duration-500  transition-opacity">✓</span>
                 </button>
 
-                <button type="button" onclick="mostrarCampoMotivo()"  class="w-full p-3.5 bg-slate-50 hover:bg-rose-50 border hover:scale-110 transition duration-500 border-slate-200 hover:border-rose-400 rounded-2xl flex items-center justify-between group transition-all duration-200 cursor-pointer">
-                    <span class="text-lg font-bold text-slate-700 group-hover:text-rose-700  uppercase   tracking-wider">🙁 Insatisfecho</span>
+                <button type="button" onclick="mostrarCampoMotivo('Regular')"  class="w-full p-3.5 bg-slate-50 hover:bg-rose-50 border hover:scale-110 transition duration-500 border-slate-200 hover:border-rose-400 rounded-2xl flex items-center justify-between group transition-all duration-200 cursor-pointer">
+                    <span class="text-lg font-bold text-slate-700 group-hover:text-rose-700  uppercase   tracking-wider">🙁 Regular</span>
+                    <span class="text-lg text-rose-500 font-bold">...</span>
+                </button>
+
+                <button type="button" onclick="mostrarCampoMotivo('Malo')"  class="w-full p-3.5 bg-slate-50 hover:bg-rose-50 border hover:scale-110 transition duration-500 border-slate-200 hover:border-rose-400 rounded-2xl flex items-center justify-between group transition-all duration-200 cursor-pointer">
+                    <span class="text-lg font-bold text-slate-700 group-hover:text-rose-700  uppercase   tracking-wider">😔 Malo</span>
                     <span class="text-lg text-rose-500 font-bold">...</span>
                 </button>
             </div>
@@ -358,8 +363,8 @@
             <!-- CUADRO DE TEXTO DESPLEGABLE (SOLO PARA INSATISFECHO) -->
             <div id="capaMotivoInsatisfecho" class="hidden space-y-3 pt-2 border-t border-slate-100">
                     <label class="block text-lg font-bold text-slate-600  uppercase">¿Nos cuentas la razón?</label>
-                    <textarea id="txtMotivo" rows="3" placeholder="Escribe aquí el motivo de tu insatisfacción..." class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#002855] resize-none"></textarea>
-                    <button type="button" onclick="procesarCalificacion('Insatisfecho')"  class="w-full bg-[#002855] hover:bg-[#001d3d] text-white font-black py-3 px-4 rounded-xl text-xs uppercase tracking-widest transition-colors cursor-pointer">
+                    <textarea id="txtMotivo" rows="3" placeholder="Escribe aquí el motivo ..." class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#002855] resize-none"></textarea>
+                    <button type="button" onclick="procesarCalificacion('')"  class="w-full bg-[#002855] hover:bg-[#001d3d] text-white font-black py-3 px-4 rounded-xl text-xs uppercase tracking-widest transition-colors cursor-pointer">
                         Enviar Calificación
                     </button>
             </div>

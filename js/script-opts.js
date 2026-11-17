@@ -215,7 +215,7 @@ function resaltarModal() {
 
 //////////////////////QULIFY ENVENTS/////////////////////////////////////
 
-
+let level = "";
 
 
 function calificacion(){
@@ -226,7 +226,10 @@ function calificacion(){
     
 }
 
-function mostrarCampoMotivo() {
+function mostrarCampoMotivo(nivel) {
+
+    level = nivel;
+
     const capaMotivo = document.getElementById('capaMotivoInsatisfecho');
     if (capaMotivo) {
         capaMotivo.classList.remove('hidden');
@@ -253,12 +256,15 @@ window.cerrarModalCalificacion = cerrarModalCalificacion;
 async function procesarCalificacion(nivel) {
 
     cerrarModalCalificacion();
+
     const campoMotivo = document.getElementById('txtMotivo');
-    const motivo = nivel === 'Insatisfecho' ? (campoMotivo?.value || '').trim() : '';
+
+     
+    const motivo = level === 'Regular' || level === 'Malo' ? (campoMotivo?.value || '').trim() : '';
 
 
     const datosCalificacion = {
-        satisfaccion: nivel,
+        satisfaccion: nivel === '' ? level : nivel,
         motivo: motivo,
     };
 

@@ -8,10 +8,8 @@
       "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --color-red-400: oklch(70.4% 0.191 22.216);
     --color-red-500: oklch(63.7% 0.237 25.331);
     --color-red-600: oklch(57.7% 0.245 27.325);
-    --color-red-700: oklch(50.5% 0.213 27.518);
     --color-orange-200: oklch(90.1% 0.076 70.697);
     --color-orange-300: oklch(83.7% 0.128 66.29);
     --color-orange-400: oklch(75% 0.183 55.934);
@@ -345,9 +343,6 @@
   .my-1 {
     margin-block: var(--spacing);
   }
-  .my-2 {
-    margin-block: calc(var(--spacing) * 2);
-  }
   .my-4 {
     margin-block: calc(var(--spacing) * 4);
   }
@@ -368,15 +363,6 @@
   }
   .mt-4 {
     margin-top: calc(var(--spacing) * 4);
-  }
-  .mt-8 {
-    margin-top: calc(var(--spacing) * 8);
-  }
-  .mt-10 {
-    margin-top: calc(var(--spacing) * 10);
-  }
-  .mt-30 {
-    margin-top: calc(var(--spacing) * 30);
   }
   .mb-0 {
     margin-bottom: 0px;
@@ -862,17 +848,8 @@
   .border-orange-700 {
     border-color: var(--color-orange-700);
   }
-  .border-red-400 {
-    border-color: var(--color-red-400);
-  }
   .border-red-500 {
     border-color: var(--color-red-500);
-  }
-  .border-red-600 {
-    border-color: var(--color-red-600);
-  }
-  .border-red-700 {
-    border-color: var(--color-red-700);
   }
   .border-slate-100 {
     border-color: var(--color-slate-100);
@@ -1799,17 +1776,8 @@
     .xl\:bottom-\[10\%\] {
       bottom: 10%;
     }
-    .xl\:mt-1 {
-      margin-top: var(--spacing);
-    }
     .xl\:mt-2 {
       margin-top: calc(var(--spacing) * 2);
-    }
-    .xl\:mt-30 {
-      margin-top: calc(var(--spacing) * 30);
-    }
-    .xl\:mt-31 {
-      margin-top: calc(var(--spacing) * 31);
     }
     .xl\:mb-4 {
       margin-bottom: calc(var(--spacing) * 4);
@@ -1852,12 +1820,6 @@
     }
     .\32 xl\:bottom-\[25\%\] {
       bottom: 25%;
-    }
-    .\32 xl\:mt-2 {
-      margin-top: calc(var(--spacing) * 2);
-    }
-    .\32 xl\:mt-41 {
-      margin-top: calc(var(--spacing) * 41);
     }
     .\32 xl\:min-h-\[690px\] {
       min-height: 690px;
